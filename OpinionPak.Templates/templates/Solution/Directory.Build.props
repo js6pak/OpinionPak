@@ -1,0 +1,16 @@
+<Project>
+    <Sdk Name="OpinionPak.Sdk" Version="0.1.0" />
+
+    <PropertyGroup>
+        <UseArtifactsOutput>true</UseArtifactsOutput>
+        <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Authors></Authors>
+        <Copyright></Copyright>
+        <PackageLicenseExpression></PackageLicenseExpression>
+        <RepositoryUrl></RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+</Project>

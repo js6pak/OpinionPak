@@ -1,0 +1,41 @@
+<Project>
+    <PropertyGroup Condition="'$(UsingMicrosoftNETSdk)' != 'true'">
+        <OpinionPakImportsMicrosoftSdk>true</OpinionPakImportsMicrosoftSdk>
+    </PropertyGroup>
+
+    <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" Condition="'$(OpinionPakImportsMicrosoftSdk)' == 'true'" />
+
+    <PropertyGroup>
+        <UsingOpinionPak>true</UsingOpinionPak>
+
+        <_OpinionPak_SdkPath>$(MSBuildThisFileDirectory)..\</_OpinionPak_SdkPath>
+
+        <!-- Annoingly BeforeMicrosoftNETSdkTargets doesn't exist and BeforeTargetFrameworkInferenceTargets seems to be the earliest hook -->
+        <BeforeTargetFrameworkInferenceTargets>$(BeforeTargetFrameworkInferenceTargets);$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdk/*.targets</BeforeTargetFrameworkInferenceTargets>
+
+        <_OpinionPak_OverriddenCustomBeforeMicrosoftCommonCrossTargetingTargets>$(CustomBeforeMicrosoftCommonCrossTargetingTargets)</_OpinionPak_OverriddenCustomBeforeMicrosoftCommonCrossTargetingTargets>
+        <CustomBeforeMicrosoftCommonCrossTargetingTargets>$(MSBuildThisFileDirectory)BeforeCommonTargets.CrossTargeting.targets</CustomBeforeMicrosoftCommonCrossTargetingTargets>
+
+        <AfterMicrosoftNETSdkTargets>$(AfterMicrosoftNETSdkTargets);$(MSBuildThisFileDirectory)AfterMicrosoftNETSdk/*.targets</AfterMicrosoftNETSdkTargets>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <_NewLine>%0A</_NewLine>
+        <_Backslash>%5C</_Backslash>
+    </PropertyGroup>
+
+    <Import Project="$(MSBuildThisFileDirectory)Tasks.props" Condition="'$(_OpinionPak_TasksAssembly)' == ''" />
+
+    <Import Project="$(MSBuildThisFileDirectory)AfterMicrosoftNETSdk/*.props" />
+
+    <ItemGroup Condition="'$(SkipOpinionPakConfigFiles)' != 'true'">
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\*.globalconfig" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Benchmark.globalconfig" Condition="'$(IsBenchmarkProject)' == 'true'" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Test.globalconfig" Condition="'$(IsTestProject)' == 'true'" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <GlobalPackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
+        <GlobalPackageReference Include="PolySharp" Version="1.14.1" />
+    </ItemGroup>
+</Project>

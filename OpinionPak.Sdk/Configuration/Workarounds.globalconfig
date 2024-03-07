@@ -1,0 +1,6 @@
+is_global = true
+global_level = -50
+
+# CA1027: Mark enums with FlagsAttribute
+# TODO remove when https://github.com/dotnet/roslyn-analyzers/pull/7120 is released
+dotnet_diagnostic.CA1027.severity = none

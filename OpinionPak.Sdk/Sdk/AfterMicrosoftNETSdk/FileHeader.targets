@@ -1,0 +1,33 @@
+<Project>
+    <PropertyGroup>
+        <GeneratedFileHeaderEditorConfigFile Condition="'$(GeneratedFileHeaderEditorConfigFile)' == ''">
+            $(BaseIntermediateOutputPath)OpinionPak_GeneratedFileHeaderEditorConfig.globalconfig
+        </GeneratedFileHeaderEditorConfigFile>
+    </PropertyGroup>
+
+    <Target Name="GenerateFileHeaderEditorConfigFile"
+            BeforeTargets="BeforeCompile;CoreCompile"
+            Outputs="$(GeneratedFileHeaderEditorConfigFile)"
+            Condition="'$(GenerateFileHeaderEditorConfig)' == 'true'">
+        <Warning Condition="'$(PackageLicenseExpression)' == ''" Text="PackageLicenseExpression is not set" />
+        <Warning Condition="'$(Copyright)' == ''" Text="Copyright is not set" />
+
+        <ItemGroup>
+            <_FileHeaderTemplate Condition="'$(PackageLicenseExpression)' != ''" Include="SPDX-License-Identifier: $(PackageLicenseExpression)" />
+            <_FileHeaderTemplate Condition="'$(Copyright)' != ''" Include="SPDX-FileCopyrightText: $(Copyright)" />
+        </ItemGroup>
+
+        <PropertyGroup>
+            <_FileHeaderTemplate>@(_FileHeaderTemplate, '$(_Backslash)n')</_FileHeaderTemplate>
+        </PropertyGroup>
+
+        <WriteLinesToFile File="$(GeneratedFileHeaderEditorConfigFile)"
+                          Lines="is_global = true;file_header_template = $(_FileHeaderTemplate)"
+                          Overwrite="true" />
+
+        <ItemGroup>
+            <FileWrites Include="$(GeneratedFileHeaderEditorConfigFile)" />
+            <EditorConfigFiles Include="$(GeneratedFileHeaderEditorConfigFile)" />
+        </ItemGroup>
+    </Target>
+</Project>

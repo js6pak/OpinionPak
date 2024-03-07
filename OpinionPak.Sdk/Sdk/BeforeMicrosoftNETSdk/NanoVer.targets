@@ -1,0 +1,28 @@
+<Project>
+    <PropertyGroup Condition="'$(NanoVer)' == 'true' and '$(VersionSuffix)' == ''">
+        <VersionSuffix>dev</VersionSuffix>
+        <VersionSuffix Condition="'$(ContinuousIntegrationBuildNumber)' != ''">ci.$(ContinuousIntegrationBuildNumber)</VersionSuffix>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateNuspecDependsOn>NanoVer;$(GenerateNuspecDependsOn)</GenerateNuspecDependsOn>
+        <GetPackageVersionDependsOn>NanoVer;$(GetPackageVersionDependsOn)</GetPackageVersionDependsOn>
+    </PropertyGroup>
+
+    <Target Name="_NanoVer_Clean" BeforeTargets="Clean" DependsOnTargets="NanoVer" Condition="'$(GeneratePackageOnBuild)' == 'true'" />
+
+    <Target Name="NanoVer"
+            BeforeTargets="BeforeCompile;GetAssemblyVersion;CoreCompile"
+            DependsOnTargets="$(_OpinionPak_TasksDependsOn)"
+            Condition="'$(NanoVer)' == 'true' and '$(_OpinionPak_IgnoreTasks)' != 'true'">
+        <NanoVer
+            WorkingDirectory="$(MSBuildProjectDirectory)"
+            TagPrefix="$(NanoVerTagPrefix)"
+            PublicRelease="$(PublicRelease)"
+            MinimumMajorMinor="$(NanoVerMinimumMajorMinor)"
+            VersionSuffix="$(VersionSuffix)">
+            <Output TaskParameter="Version" PropertyName="Version" />
+            <Output TaskParameter="Version" PropertyName="PackageVersion" />
+        </NanoVer>
+    </Target>
+</Project>

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/ide.host",
+  "tags": [
+    {
+      "type": "projectType",
+      "add": [],
+      "remove": [
+        "Common"
+      ]
+    }
+  ],
+  "symbolInfo": [
+  ]
+}

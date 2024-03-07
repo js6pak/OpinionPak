@@ -1,0 +1,28 @@
+<Project>
+    <PropertyGroup Condition="Exists('$(PackageIconPath)')">
+        <IconName>$([System.IO.Path]::GetFileName('$(PackageIconPath)'))</IconName>
+        <PackageIcon>$(IconName)</PackageIcon>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(PackageIconPath)')">
+        <None Include="$(PackageIconPath)" Pack="true" PackagePath="/">
+            <Link>$(IconName)</Link>
+            <InProject>false</InProject>
+        </None>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <PackageReadmePath Condition="'$(PackageReadmePath)' == ''">$(MSBuildProjectDirectory)/README.md</PackageReadmePath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="Exists('$(PackageReadmePath)')">
+        <ReadmeName>$([System.IO.Path]::GetFileName('$(PackageReadmePath)'))</ReadmeName>
+        <PackageReadmeFile>$(ReadmeName)</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(PackageReadmePath)')">
+        <None Include="$(PackageReadmePath)" Pack="true" PackagePath="/">
+            <Link>$(ReadmeName)</Link>
+        </None>
+    </ItemGroup>
+</Project>

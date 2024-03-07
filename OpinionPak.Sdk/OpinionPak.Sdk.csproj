@@ -1,0 +1,22 @@
+﻿<Project Sdk="OpinionPak.Sdk/0.1.0-alpha.1">
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net472</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+        <Description>My .NET opinions packaged as a MSBuild SDK</Description>
+        <PackageType>MSBuildSdk</PackageType>
+        <IsMSBuildTasksProject>true</IsMSBuildTasksProject>
+
+        <GenerateRootEditorConfig>false</GenerateRootEditorConfig>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="Sdk\**" Pack="true" PackagePath="Sdk\" />
+        <None Include="Configuration\**" Pack="true" PackagePath="Configuration\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NuGet.Versioning" ExcludeAssets="runtime" />
+        <PackageReference Include="NuGet.ProjectModel" ExcludeAssets="runtime" />
+    </ItemGroup>
+</Project>

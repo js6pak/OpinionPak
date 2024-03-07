@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "js6pak",
+  "classifications": [
+    "Common"
+  ],
+  "name": "OpinionPak: Solution",
+  "generatorVersions": "[1.0.0.0-*)",
+  "description": "Solution template for OpinionPak",
+  "identity": "OpinionPak.Templates.Solution",
+  "shortName": "op-solution",
+  "tags": {
+    "type": "solution",
+    "platform": "OpinionPak"
+  },
+  "sourceName": "Company.Solution1",
+  "preferNameDirectory": true,
+  "symbols": {
+    "HostIdentifier": {
+      "type": "bind",
+      "binding": "host:HostIdentifier"
+    }
+  },
+  "primaryOutputs": [
+    {
+      "path": "Company.Solution1.sln"
+    }
+  ],
+  "defaultName": "Solution1",
+  "postActions": [
+  ]
+}

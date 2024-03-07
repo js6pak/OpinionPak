@@ -1,0 +1,31 @@
+is_global = true
+global_level = -50
+
+resharper_apply_auto_detected_rules = false
+
+# TODO keep_existing_* doesn't work when wrap_before/after_* are set for some reason
+# keep_existing_invocation_parens_arrangement = true
+# wrap_arguments_style = chop_if_long
+# wrap_before_invocation_lpar = false
+# wrap_after_invocation_lpar = true
+# wrap_before_invocation_rpar = true
+
+keep_existing_declaration_parens_arrangement = true
+wrap_parameters_style = chop_if_long
+wrap_before_declaration_lpar = false
+wrap_after_declaration_lpar = true
+wrap_before_declaration_rpar = true
+
+keep_existing_primary_constructor_declaration_parens_arrangement = true
+wrap_primary_constructor_parameters_style = chop_if_long
+wrap_before_primary_constructor_declaration_lpar = false
+wrap_after_primary_constructor_declaration_lpar = true
+wrap_before_primary_constructor_declaration_rpar = true
+
+keep_existing_initializer_arrangement = true
+wrap_object_and_collection_initializer_style = chop_if_long
+max_initializer_elements_on_line = 1
+wrap_array_initializer_style = chop_if_long
+max_array_initializer_elements_on_line = 1
+
+align_linq_query = true

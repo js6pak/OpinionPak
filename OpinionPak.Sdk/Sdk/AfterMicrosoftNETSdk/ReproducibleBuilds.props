@@ -1,0 +1,10 @@
+<Project>
+    <PropertyGroup>
+        <Deterministic>true</Deterministic>
+
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    </PropertyGroup>
+</Project>

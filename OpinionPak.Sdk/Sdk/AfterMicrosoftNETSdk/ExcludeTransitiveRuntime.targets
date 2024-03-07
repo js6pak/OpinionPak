@@ -1,0 +1,28 @@
+<Project>
+    <ItemGroup>
+        <ExcludeTransitiveRuntime Include="@(PackageReference->WithMetadataValue('ExcludeTransitiveRuntime', 'true'))" />
+    </ItemGroup>
+
+    <Target Name="ExcludeTransitiveRuntime"
+            AfterTargets="ResolvePackageAssets"
+            DependsOnTargets="$(_OpinionPak_TasksDependsOn)"
+            Condition="'@(ExcludeTransitiveRuntime)' != '' and '$(_OpinionPak_IgnoreTasks)' != 'true'">
+        <GetTransitiveDependencies AssetsFilePath="$(ProjectAssetsFile)"
+                                   Packages="@(ExcludeTransitiveRuntime)"
+                                   IgnoreVersion="true"
+                                   TargetFramework="$(TargetFramework)"
+                                   RuntimeIdentifier="$(RuntimeIdentifier)">
+            <Output TaskParameter="TransitivePackages" ItemName="_RuntimePackages" />
+        </GetTransitiveDependencies>
+
+        <FilterByPackageIdentity Input="@(RuntimeCopyLocalItems)"
+                                 Packages="@(_RuntimePackages)"
+                                 IgnoreVersion="true">
+            <Output TaskParameter="Output" ItemName="_RuntimePackagesFiles" />
+        </FilterByPackageIdentity>
+
+        <ItemGroup>
+            <RuntimeCopyLocalItems Remove="@(_RuntimePackagesFiles)" />
+        </ItemGroup>
+    </Target>
+</Project>

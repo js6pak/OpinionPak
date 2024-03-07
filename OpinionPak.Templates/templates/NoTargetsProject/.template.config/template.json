@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "js6pak",
+  "classifications": [
+    "Common"
+  ],
+  "name": "OpinionPak: NoTargets Project",
+  "generatorVersions": "[1.0.0.0-*)",
+  "description": "NoTargets project template for OpinionPak",
+  "identity": "OpinionPak.Templates.NoTargets",
+  "shortName": "op-notargets",
+  "tags": {
+    "language": "None",
+    "type": "project",
+    "platform": "OpinionPak"
+  },
+  "sourceName": "Company.NoTargetsProject1",
+  "preferNameDirectory": true,
+  "symbols": {
+    "HostIdentifier": {
+      "type": "bind",
+      "binding": "host:HostIdentifier"
+    }
+  },
+  "primaryOutputs": [
+    {
+      "path": "Company.NoTargetsProject1.proj"
+    }
+  ],
+  "defaultName": "NoTargetsProject1",
+  "postActions": [
+    {
+      "description": "Add projects to solution",
+      "manualInstructions": [
+        {
+          "text": "Add generated project to solution manually."
+        }
+      ],
+      "args": {
+        "inRoot": true
+      },
+      "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+      "continueOnError": true
+    },
+    {
+      "id": "open-file",
+      "condition": "(HostIdentifier != \"dotnetcli\" && HostIdentifier != \"dotnetcli-preview\")",
+      "description": "Opens Company.NoTargetsProject1.proj in the editor",
+      "manualInstructions": [],
+      "actionId": "84C0DA21-51C8-4541-9940-6CA19AF04EE6",
+      "args": {
+        "files": "0"
+      },
+      "continueOnError": true
+    }
+  ]
+}

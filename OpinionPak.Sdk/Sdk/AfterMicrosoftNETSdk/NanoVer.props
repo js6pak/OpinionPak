@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <PublicRelease Condition="$(GITHUB_REF.StartsWith('refs/tags/'))">true</PublicRelease>
+
+        <NanoVerMinimumMajorMinor>0.1</NanoVerMinimumMajorMinor>
+    </PropertyGroup>
+</Project>

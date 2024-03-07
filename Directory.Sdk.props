@@ -1,0 +1,28 @@
+<Project>
+    <PropertyGroup>
+        <_OpinionPak_SdkPath>$(MSBuildThisFileDirectory)OpinionPak.Sdk\</_OpinionPak_SdkPath>
+
+        <_OpinionPak_TasksDependsOn>ResolveProjectReferences</_OpinionPak_TasksDependsOn>
+
+        <!-- Unfournately we have to hardcode the output path here because we need it at eval time -->
+        <!-- TODO maybe switch to a solution like https://github.com/dotnet/msbuild/issues/642#issuecomment-480965240 -->
+        <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+        <_OpinionPak_TasksDirectory>$(MSBuildThisFileDirectory)artifacts\bin\OpinionPak.Sdk\$(Configuration.ToLower())_</_OpinionPak_TasksDirectory>
+    </PropertyGroup>
+
+    <Import Project="$(_OpinionPak_SdkPath)Sdk\Tasks.props" />
+
+    <ItemGroup>
+        <ProjectReference Include="$(_OpinionPak_SdkPath)\OpinionPak.Sdk.csproj"
+                          ReferenceOutputAssembly="false"
+                          SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(_OpinionPak_TasksTFM)" />
+    </ItemGroup>
+
+    <Target Name="DisableCleanReferencedProjects" BeforeTargets="CleanReferencedProjects">
+        <PropertyGroup>
+            <BuildProjectReferences>false</BuildProjectReferences>
+        </PropertyGroup>
+    </Target>
+
+    <Import Project="Sdk.props" Sdk="$(_OpinionPak_SdkPath)" />
+</Project>

@@ -1,0 +1,32 @@
+<Project>
+    <!-- https://github.com/dotnet/roslyn/issues/41640 -->
+    <PropertyGroup Condition="'$(GenerateDocumentationFile)' == ''">
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <CopyDocumentationFileToOutputDirectory>false</CopyDocumentationFileToOutputDirectory>
+        <PublishDocumentationFile>false</PublishDocumentationFile>
+
+        <!--
+          Make sure any documentation comments which are included in code get checked for syntax during the build, but do
+          not report warnings for missing comments.
+
+          CS1573: Parameter 'parameter' has no matching param tag in the XML comment for 'member' (but other parameters do)
+          CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
+          CS1712: Type parameter 'parameter' has no matching typeparam tag in the XML comment on 'type_or_member' (but other type parameters do)
+        -->
+        <NoWarn>$(NoWarn);CS1573;CS1591;CS1712</NoWarn>
+    </PropertyGroup>
+
+    <Target Name="_RemoveDocumentationFileFromPackaging"
+            AfterTargets="DocumentationProjectOutputGroup"
+            Condition="'$(PublishDocumentationFile)' == 'false'">
+        <ItemGroup>
+            <DocumentationProjectOutputGroupOutput Remove="@(DocumentationProjectOutputGroupOutput)" />
+        </ItemGroup>
+    </Target>
+
+    <ItemGroup Condition="'$(ManagePackageVersionsCentrally)' != 'true'">
+        <PackageReference Include="@(GlobalPackageReference)"
+                          IncludeAssets="runtime;build;native;contentFiles;analyzers"
+                          PrivateAssets="all" />
+    </ItemGroup>
+</Project>

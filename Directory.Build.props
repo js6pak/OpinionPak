@@ -1,0 +1,15 @@
+<Project>
+    <Import Project="$(MSBuildThisFileDirectory)Directory.Sdk.props" Condition="'$(MSBuildProjectName)' != 'OpinionPak.Sdk'" />
+
+    <PropertyGroup>
+        <UseArtifactsOutput>true</UseArtifactsOutput>
+        <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Authors>js6pak</Authors>
+        <Copyright>2024 js6pak</Copyright>
+        <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/js6pak/OpinionPak</RepositoryUrl>
+    </PropertyGroup>
+</Project>

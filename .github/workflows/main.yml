@@ -1,0 +1,68 @@
+name: CI
+
+on: [ "push", "pull_request" ]
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: true
+  TERM: xterm
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: tree:0
+
+      - name: Setup .NET
+        uses: js6pak/setup-dotnet@feat/support-rollForward
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: "**/packages.lock.json"
+
+      - name: Restore
+        run: dotnet restore --locked-mode
+
+      - name: Build
+        run: dotnet build --no-restore -c Release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget
+          path: artifacts/package/release/*.nupkg
+
+      - name: Format
+        run: |
+          # dotnet-format doesn't support specifying configuration so we have to do a Debug build
+          dotnet build --no-restore -c Debug OpinionPak.Sdk/
+          dotnet format --no-restore --verbosity diagnostic --verify-no-changes
+
+      - name: Test
+        run: dotnet test --no-restore -c Release --logger GitHubActions
+
+      - name: Run EditorConfigGenerator
+        run: dotnet run --no-restore -c Release --project ./EditorConfigGenerator -- --verify-no-changes
+
+      - name: Publish nightly
+        if: github.repository == 'js6pak/OpinionPak' && github.ref == 'refs/heads/master'
+        env:
+          NUGET_SOURCE: nuget.6pak.dev
+          NUGET_API_KEY: ${{ secrets.NIGHTLY_NUGET_API_KEY }}
+        run: |
+          dotnet nuget push --skip-duplicate artifacts/package/release/*.nupkg \
+            --source "$NUGET_SOURCE" --api-key "$NUGET_API_KEY"
+
+      - name: Publish
+        if: github.ref_type == 'tag'
+        env:
+          NUGET_SOURCE: nuget.org
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push --skip-duplicate artifacts/package/release/*.nupkg \
+            --source "$NUGET_SOURCE" --api-key "$NUGET_API_KEY"

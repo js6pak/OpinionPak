@@ -1,0 +1,8 @@
+<Project>
+    <PropertyGroup>
+        <_OpinionPak_TasksTFM Condition="'$(MSBuildRuntimeType)' == 'Core'">net8.0</_OpinionPak_TasksTFM>
+        <_OpinionPak_TasksTFM Condition="'$(MSBuildRuntimeType)' != 'Core'">net472</_OpinionPak_TasksTFM>
+        <_OpinionPak_TasksDirectory Condition="'$(_OpinionPak_TasksDirectory)' == ''">$(_OpinionPak_SdkPath)tasks\</_OpinionPak_TasksDirectory>
+        <_OpinionPak_TasksAssembly>$(_OpinionPak_TasksDirectory)$(_OpinionPak_TasksTFM)\OpinionPak.Sdk.dll</_OpinionPak_TasksAssembly>
+    </PropertyGroup>
+</Project>

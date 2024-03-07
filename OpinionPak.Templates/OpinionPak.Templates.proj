@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+        <Description>Templates for OpinionPak</Description>
+        <PackageType>Template</PackageType>
+
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <ContentTargetFolders>content</ContentTargetFolders>
+        <NoDefaultExcludes>true</NoDefaultExcludes>
+
+        <!-- TODO remove when ready -->
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+        <PackageReference Include="Microsoft.TemplateEngine.Authoring.Tasks" PrivateAssets="all" />
+    </ItemGroup>
+
+    <Target Name="InstallTemplates" DependsOnTargets="Pack">
+        <Exec Command="dotnet new uninstall $(PackageId)" ContinueOnError="true" IgnoreExitCode="" />
+        <Exec Command="dotnet new install $(PackageTargetPath)" />
+    </Target>
+</Project>

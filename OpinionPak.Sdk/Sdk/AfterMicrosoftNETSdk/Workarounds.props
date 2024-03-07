@@ -1,0 +1,6 @@
+<Project>
+    <!-- https://github.com/dotnet/sdk/issues/11292 -->
+    <PropertyGroup Condition="'$(DefaultProjectTypeGuid)' == ''">
+        <DefaultProjectTypeGuid Condition="'$(MSBuildProjectExtension)' == '.proj'">{35D38287-295A-47DF-9AE7-5A63F96667D5}</DefaultProjectTypeGuid>
+    </PropertyGroup>
+</Project>
