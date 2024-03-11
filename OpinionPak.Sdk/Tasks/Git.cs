@@ -63,6 +63,7 @@ internal static class Git
             FileName = "git",
             WorkingDirectory = workingDirectory,
             UseShellExecute = false,
+            CreateNoWindow = true,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
         };
