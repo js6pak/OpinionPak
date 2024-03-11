@@ -19,4 +19,16 @@
         <PackageReference Include="NuGet.Versioning" ExcludeAssets="runtime" />
         <PackageReference Include="NuGet.ProjectModel" ExcludeAssets="runtime" />
     </ItemGroup>
+
+    <!-- Unlike unixes, Windows treats file locks seriously so we have to move the output first as dotnet's build-server could still be holding onto it -->
+    <Target Name="UnlockOutput"
+            BeforeTargets="CopyFilesToOutputDirectory"
+            Condition="$([MSBuild]::IsOSPlatform('Windows')) and Exists('$(TargetPath)')">
+        <PropertyGroup>
+            <TempTargetPath>$([System.IO.Path]::GetTempPath())\$(AssemblyName)\$([System.IO.Path]::GetRandomFileName()).dll</TempTargetPath>
+        </PropertyGroup>
+
+        <Delete Files="$(TargetPath)" ContinueOnError="true" />
+        <Move SourceFiles="$(TargetPath)" DestinationFiles="$(TempTargetPath)" Condition="'$(MSBuildLastTaskResult)' == 'false'" />
+    </Target>
 </Project>
