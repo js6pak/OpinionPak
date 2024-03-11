@@ -5,6 +5,23 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
+
+    <!-- Based on https://github.com/dotnet/reproducible-builds/blob/f41ae4c0a4400acce7797691d69134f2562b26b0/src/DotNet.ReproducibleBuilds.Isolated/Sdk/Sdk.props -->
+
+    <!-- Disable msbuild's lookup of .NET Framework sdks through OS registry -->
+    <PropertyGroup>
+        <TargetFrameworkRootPath>[UNDEFINED]</TargetFrameworkRootPath>
+    </PropertyGroup>
+
+    <!-- Disable msbuild's lookup of reference assemblies through default install locations -->
+    <PropertyGroup>
+        <NetCoreTargetingPackRoot>[UNDEFINED]</NetCoreTargetingPackRoot>
+    </PropertyGroup>
+
+    <!-- Disable the extra implicit nuget package caches provided by .NET sdk. -->
+    <PropertyGroup>
         <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+        <DisableImplicitLibraryPacksFolder>true</DisableImplicitLibraryPacksFolder>
     </PropertyGroup>
 </Project>
