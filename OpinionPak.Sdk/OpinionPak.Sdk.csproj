@@ -16,8 +16,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="NuGet.Versioning" ExcludeAssets="runtime" />
-        <PackageReference Include="NuGet.ProjectModel" ExcludeAssets="runtime" />
+        <PackageReference Include="NuGet.Versioning" PrivateAssets="all" />
+        <PackageReference Include="NuGet.ProjectModel" PrivateAssets="all" />
+    </ItemGroup>
+
+    <!-- Use NuGet libraries from .NET SDK -->
+    <ItemGroup Condition="'$(TargetFramework)' != 'net472'">
+        <PackageReference Update="NuGet.Versioning" ExcludeAssets="runtime" />
+        <PackageReference Update="NuGet.ProjectModel" ExcludeAssets="runtime" />
     </ItemGroup>
 
     <!-- Unlike unixes, Windows treats file locks seriously so we have to move the output first as dotnet's build-server could still be holding onto it -->
