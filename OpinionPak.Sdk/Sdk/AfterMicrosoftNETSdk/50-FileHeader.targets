@@ -7,6 +7,7 @@
 
     <Target Name="GenerateFileHeaderEditorConfigFile"
             BeforeTargets="BeforeCompile;CoreCompile"
+            DependsOnTargets="PrepareForBuild"
             Outputs="$(GeneratedFileHeaderEditorConfigFile)"
             Condition="'$(GenerateFileHeaderEditorConfig)' == 'true'">
         <Warning Condition="'$(PackageLicenseExpression)' == ''" Text="PackageLicenseExpression is not set" />

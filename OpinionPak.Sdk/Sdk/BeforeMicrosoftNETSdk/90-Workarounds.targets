@@ -29,4 +29,15 @@
                           IncludeAssets="runtime;build;native;contentFiles;analyzers"
                           PrivateAssets="all" />
     </ItemGroup>
+
+    <!-- Show bin/obj folders from artifacts under every project in IDE -->
+    <ItemGroup Condition="'$(UseArtifactsOutput)' == 'true'">
+        <Folder Include="$(BaseIntermediateOutputPath)" Link="obj" Visible="false" />
+        <Folder Include="$(BaseOutputPath)" Link="bin" Visible="false" />
+    </ItemGroup>
+
+    <!-- Make configuration casing consistent when using artifacts output -->
+    <PropertyGroup Condition="'$(UseArtifactsOutput)' == 'true'">
+        <NuspecOutputPath Condition="'$(NuspecOutputPath)' == ''">$(BaseIntermediateOutputPath)$(Configuration.ToLowerInvariant())\</NuspecOutputPath>
+    </PropertyGroup>
 </Project>
