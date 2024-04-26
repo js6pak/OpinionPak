@@ -1,8 +1,11 @@
 <Project>
     <PropertyGroup Condition="'$(IsMSBuildTasksProject)' == 'true'">
+        <TargetFrameworks Condition="'$(TargetFrameworks)' == '' and '$(TargetNetSdkFramework)' != ''">$(TargetNetSdkFramework);net472</TargetFrameworks>
+
         <DevelopmentDependency>true</DevelopmentDependency>
         <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <ResolveAssemblyReferencesFindRelatedFiles>false</ResolveAssemblyReferencesFindRelatedFiles>
         <GenerateDependencyFile>false</GenerateDependencyFile>
 
         <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>

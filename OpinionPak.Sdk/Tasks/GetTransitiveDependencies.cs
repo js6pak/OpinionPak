@@ -85,7 +85,11 @@ public sealed class GetTransitiveDependencies : MSBuildTask
     {
         foreach (var dependency in dependencies)
         {
-            var library = libraryLookup[dependency.Id];
+            if (!libraryLookup.TryGetValue(dependency.Id, out var library))
+            {
+                continue;
+            }
+
             if (library.Version!.Equals(dependency.VersionRange.MinVersion) || ignoreVersion)
             {
                 if (exclusionList.Add(new PackageIdentity(library.Name, library.Version)))

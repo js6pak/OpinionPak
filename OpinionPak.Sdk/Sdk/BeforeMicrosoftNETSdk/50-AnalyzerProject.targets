@@ -1,0 +1,93 @@
+<Project>
+    <PropertyGroup Condition="'$(IsCodeFixesProject)' == 'true'">
+        <IsAnalyzerProject>true</IsAnalyzerProject>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(IsAnalyzerProject)' == 'true'">
+        <RoslynPackageVersion Condition="'$(RoslynPackageVersion)' == '' and '$(TargetRoslyn)' != ''">$(TargetRoslyn)</RoslynPackageVersion>
+
+        <!-- Ideally we would multi-target like MSBuildTasksProject does, but .NET SDK doesn't support that currently -->
+        <TargetFramework Condition="'$(TargetFramework)' == '' and '$(TargetFrameworks)' == ''">netstandard2.0</TargetFramework>
+
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <ResolveAssemblyReferencesFindRelatedFiles>false</ResolveAssemblyReferencesFindRelatedFiles>
+    </PropertyGroup>
+
+    <!-- if !IsPackable -->
+    <PropertyGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(IsPackable)' == 'false'">
+        <!-- Avoid ID conflicts with the package project. -->
+        <PackageId Condition="'$(PackageId)' == ''">*$(MSBuildProjectFile)*</PackageId>
+    </PropertyGroup>
+    <!-- else -->
+    <PropertyGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(IsPackable)' == 'true'">
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <GenerateDependencyFile>false</GenerateDependencyFile>
+
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+
+        <NoTargetsDoNotReferenceOutputAssemblies>false</NoTargetsDoNotReferenceOutputAssemblies>
+        <CustomAfterNoTargets>$(CustomAfterNoTargets);$(MSBuildThisFileDirectory)..\AnalyzerPackageProject.targets</CustomAfterNoTargets>
+    </PropertyGroup>
+
+    <ItemDefinitionGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(IsPackable)' == 'true'">
+        <PackageReference PrivateAssets="all" />
+    </ItemDefinitionGroup>
+
+    <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(IsPackable)' == 'true'">
+        <None Include="$(TargetPath)" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'" />
+    </ItemGroup>
+
+    <Target Name="IncludeCopyLocalInAnalyzerPackage" AfterTargets="ResolveReferences" Condition="'$(IsAnalyzerProject)' == 'true' and '$(IsPackable)' == 'true'">
+        <ItemGroup>
+            <None Include="@(ReferenceCopyLocalPaths)" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        </ItemGroup>
+    </Target>
+    <!-- endif -->
+
+    <!-- if !UsingMicrosoftNoTargetsSdk -->
+    <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(UsingMicrosoftNoTargetsSdk)' != 'true'">
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true" Condition="'$(IsCodeFixesProject)' == 'true'" />
+
+        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" />
+        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynPackageVersion)" />
+        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynPackageVersion)" Condition="'$(IsCodeFixesProject)' == 'true'" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(UsingMicrosoftNoTargetsSdk)' != 'true' and '$(ManagePackageVersionsCentrally)' != 'true'">
+        <PackageReference Update="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" />
+        <PackageReference Update="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynPackageVersion)" />
+        <PackageReference Update="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynPackageVersion)" Condition="'$(IsCodeFixesProject)' == 'true'" />
+    </ItemGroup>
+    <!-- else -->
+    <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(UsingMicrosoftNoTargetsSdk)' == 'true'">
+        <ExcludeTransitiveRuntime Include="Microsoft.CodeAnalysis.CSharp" />
+        <ExcludeTransitiveRuntime Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Condition="'$(IsCodeFixesProject)' == 'true'" />
+    </ItemGroup>
+    <!-- endif -->
+
+    <Target Name="IncludeCopyLocalInAnalyzerTargetPath" BeforeTargets="GetTargetPath" DependsOnTargets="ResolveReferences" Condition="'$(IsAnalyzerProject)' == 'true' and '$(IncludeCopyLocalInAnalyzerTargetPath)' == 'true'">
+        <ItemGroup>
+            <TargetPathWithTargetPlatformMoniker Include="@(ReferenceCopyLocalPaths)" IncludeRuntimeDependency="false" />
+        </ItemGroup>
+    </Target>
+
+    <ItemDefinitionGroup>
+        <AnalyzerProjectReference Visible="false" />
+    </ItemDefinitionGroup>
+
+    <ItemGroup>
+        <ProjectReference Update="@(ProjectReference)">
+            <UndefineProperties>%(ProjectReference.UndefineProperties);IncludeCopyLocalInAnalyzerTargetPath</UndefineProperties>
+        </ProjectReference>
+
+        <ProjectReference Include="@(AnalyzerProjectReference)"
+                          ReferenceOutputAssembly="false" OutputItemType="Analyzer"
+                          Properties="IncludeCopyLocalInAnalyzerTargetPath=true;%(AnalyzerProjectReference.Properties)" />
+    </ItemGroup>
+</Project>
