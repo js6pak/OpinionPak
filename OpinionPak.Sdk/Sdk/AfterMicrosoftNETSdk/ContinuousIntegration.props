@@ -14,7 +14,7 @@
         '$(TEAMCITY_VERSION)' != '' or
         '$(JB_SPACE_API_URL)' != ''
     ">
-        <ContinuousIntegrationBuild Condition="'f$(ContinuousIntegrationBuild)' == ''">true</ContinuousIntegrationBuild>
+        <ContinuousIntegrationBuild Condition="'$(ContinuousIntegrationBuild)' == ''">true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(RepositoryBranch)' == ''">
