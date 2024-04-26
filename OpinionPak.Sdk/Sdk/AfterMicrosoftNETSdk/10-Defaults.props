@@ -5,19 +5,11 @@
         <DebugType>embedded</DebugType>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <AnalysisLevel>latest-all</AnalysisLevel>
-        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <ReportAnalyzer>true</ReportAnalyzer>
 
-        <NanoVer>true</NanoVer>
-        <GenerateFileHeaderEditorConfig>true</GenerateFileHeaderEditorConfig>
-        <GenerateRootEditorConfig>true</GenerateRootEditorConfig>
-    </PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(Configuration)' == 'Release'">
-        <RestoreLockedMode>true</RestoreLockedMode>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <NanoVer>true</NanoVer>
     </PropertyGroup>
 </Project>

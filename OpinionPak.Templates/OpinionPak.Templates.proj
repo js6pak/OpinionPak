@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <!-- TODO uncomment when ready -->
+        <!-- <IsPackable>true</IsPackable> -->
 
         <Description>Templates for OpinionPak</Description>
         <PackageType>Template</PackageType>
@@ -10,9 +11,6 @@
         <IncludeContentInPack>true</IncludeContentInPack>
         <ContentTargetFolders>content</ContentTargetFolders>
         <NoDefaultExcludes>true</NoDefaultExcludes>
-
-        <!-- TODO remove when ready -->
-        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>

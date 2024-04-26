@@ -1,0 +1,8 @@
+<Project>
+    <ItemGroup Condition="'$(SkipOpinionPakConfigFiles)' != 'true'">
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\*.editorconfig" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\*.globalconfig" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Benchmark.globalconfig" Condition="'$(IsBenchmarkProject)' == 'true'" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Test.globalconfig" Condition="'$(IsTestProject)' == 'true'" />
+    </ItemGroup>
+</Project>

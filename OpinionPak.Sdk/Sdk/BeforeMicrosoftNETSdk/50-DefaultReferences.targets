@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+        <StyleCopAnalyzersVersion Condition="'$(StyleCopAnalyzersVersion)' == ''">1.2.0-beta.556</StyleCopAnalyzersVersion>
+        <PolySharpVersion Condition="'$(PolySharpVersion)' == ''">1.14.1</PolySharpVersion>
+        <MicrosoftCodeAnalysisAnalyzersVersion Condition="'$(MicrosoftCodeAnalysisAnalyzersVersion)' == ''">3.3.4</MicrosoftCodeAnalysisAnalyzersVersion>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">
+        <GlobalPackageReference Include="StyleCop.Analyzers" Version="$(StyleCopAnalyzersVersion)" Condition="'$(SkipOpinionPakConfigFiles)' != 'true'" />
+        <GlobalPackageReference Include="PolySharp" Version="$(PolySharpVersion)" Condition="'$(SkipPolySharp)' != 'true'" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+<Project>
+    <PropertyGroup Condition="'$(SkipOpinionPakConfigFiles)' != 'true'">
+        <EnableNETAnalyzers Condition="'$(EnableNETAnalyzers)' == ''">true</EnableNETAnalyzers>
+        <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">latest</AnalysisLevel>
+        <AnalysisMode Condition="'$(AnalysisMode)' == ''">all</AnalysisMode>
+        <EnforceCodeStyleInBuild Condition="'$(EnforceCodeStyleInBuild)' == ''">true</EnforceCodeStyleInBuild>
+
+        <GenerateFileHeaderEditorConfig Condition="'$(GenerateFileHeaderEditorConfig)' == ''">true</GenerateFileHeaderEditorConfig>
+        <GenerateRootEditorConfig Condition="'$(GenerateRootEditorConfig)' == ''">true</GenerateRootEditorConfig>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(Configuration)' == 'Release'">
+        <RestoreLockedMode Condition="'$(RestoreLockedMode)' == ''">true</RestoreLockedMode>
+        <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == ''">true</TreatWarningsAsErrors>
+    </PropertyGroup>
+</Project>

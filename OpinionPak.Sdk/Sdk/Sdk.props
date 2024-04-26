@@ -27,15 +27,4 @@
     <Import Project="$(MSBuildThisFileDirectory)Tasks.props" Condition="'$(_OpinionPak_TasksAssembly)' == ''" />
 
     <Import Project="$(MSBuildThisFileDirectory)AfterMicrosoftNETSdk/*.props" />
-
-    <ItemGroup Condition="'$(SkipOpinionPakConfigFiles)' != 'true'">
-        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\*.globalconfig" />
-        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Benchmark.globalconfig" Condition="'$(IsBenchmarkProject)' == 'true'" />
-        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Test.globalconfig" Condition="'$(IsTestProject)' == 'true'" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <GlobalPackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556" />
-        <GlobalPackageReference Include="PolySharp" Version="1.14.1" />
-    </ItemGroup>
 </Project>
