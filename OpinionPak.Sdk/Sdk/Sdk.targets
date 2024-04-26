@@ -1,3 +1,6 @@
 <Project>
+    <!-- if OpinionPakImportsMicrosoftSdk -->
+    <Import Project="$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdk/*.targets" Condition="'$(OpinionPakImportsMicrosoftSdk)' == 'true' and '$(_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets)' != 'true'" />
     <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" Condition="'$(OpinionPakImportsMicrosoftSdk)' == 'true'" />
+    <!-- endif -->
 </Project>

@@ -2,5 +2,5 @@
     <Import Project="$(_OpinionPak_OverriddenCustomBeforeMicrosoftCommonCrossTargetingTargets)"
             Condition="Exists('$(_OpinionPak_OverriddenCustomBeforeMicrosoftCommonCrossTargetingTargets)')" />
 
-    <Import Project="$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdk/*.targets" />
+    <Import Project="$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdk/*.targets" Condition="'$(_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets)' != 'true'" />
 </Project>

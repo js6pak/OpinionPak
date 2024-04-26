@@ -10,9 +10,16 @@
 
         <_OpinionPak_SdkPath>$(MSBuildThisFileDirectory)..\</_OpinionPak_SdkPath>
 
-        <!-- Annoingly BeforeMicrosoftNETSdkTargets doesn't exist and BeforeTargetFrameworkInferenceTargets seems to be the earliest hook -->
-        <BeforeTargetFrameworkInferenceTargets>$(BeforeTargetFrameworkInferenceTargets);$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdk/*.targets</BeforeTargetFrameworkInferenceTargets>
+        <!--
+            BeforeMicrosoftNETSdkTargets doesn't exist in the SDK yet (https://github.com/dotnet/sdk/pull/40344),
+            but we still set it in case it has to be used manually (e.g. for MSBuildTasksProject)
+        -->
+        <BeforeMicrosoftNETSdkTargets>$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdkTargets.targets</BeforeMicrosoftNETSdkTargets>
 
+        <!-- This is the earliest single-targeting hook used as a fallback -->
+        <BeforeTargetFrameworkInferenceTargets>$(BeforeTargetFrameworkInferenceTargets);$(MSBuildThisFileDirectory)BeforeTargetFrameworkInferenceTargets.targets</BeforeTargetFrameworkInferenceTargets>
+
+        <!-- This is the earliest cross-targeting hook used as a fallback -->
         <_OpinionPak_OverriddenCustomBeforeMicrosoftCommonCrossTargetingTargets>$(CustomBeforeMicrosoftCommonCrossTargetingTargets)</_OpinionPak_OverriddenCustomBeforeMicrosoftCommonCrossTargetingTargets>
         <CustomBeforeMicrosoftCommonCrossTargetingTargets>$(MSBuildThisFileDirectory)BeforeCommonTargets.CrossTargeting.targets</CustomBeforeMicrosoftCommonCrossTargetingTargets>
 

@@ -1,0 +1,3 @@
+<Project>
+    <Import Project="$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdk/*.targets" Condition="'$(_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets)' != 'true'" />
+</Project>

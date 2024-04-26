@@ -1,4 +1,8 @@
 <Project>
+    <PropertyGroup>
+        <_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets>true</_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets>
+    </PropertyGroup>
+
     <PropertyGroup Condition="'$(SkipOpinionPakConfigFiles)' != 'true'">
         <EnableNETAnalyzers Condition="'$(EnableNETAnalyzers)' == ''">true</EnableNETAnalyzers>
         <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">latest</AnalysisLevel>
