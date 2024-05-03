@@ -1,11 +1,11 @@
-﻿<Project Sdk="OpinionPak.Sdk/0.1.0-alpha.1">
+﻿<Project Sdk="OpinionPak.Sdk/0.1.0-ci.17">
     <PropertyGroup>
-        <TargetFrameworks>net8.0;net472</TargetFrameworks>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IsMSBuildTasksProject>true</IsMSBuildTasksProject>
+        <TargetNetSdk>8.0.1xx</TargetNetSdk>
+        <IsPackable>true</IsPackable>
 
         <Description>My .NET opinions packaged as a MSBuild SDK</Description>
         <PackageType>MSBuildSdk</PackageType>
-        <IsMSBuildTasksProject>true</IsMSBuildTasksProject>
 
         <GenerateRootEditorConfig>false</GenerateRootEditorConfig>
     </PropertyGroup>
@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <!-- Use NuGet libraries from .NET SDK -->
-    <ItemGroup Condition="'$(TargetFramework)' != 'net472'">
+    <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
         <PackageReference Update="NuGet.Versioning" ExcludeAssets="runtime" />
         <PackageReference Update="NuGet.ProjectModel" ExcludeAssets="runtime" />
     </ItemGroup>

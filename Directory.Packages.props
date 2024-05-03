@@ -2,9 +2,6 @@
     <PropertyGroup>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
-        <!-- https://learn.microsoft.com/en-us/dotnet/core/porting/versioning-sdk-msbuild-vs#lifecycle -->
-        <MicrosoftBuildPackageVersion>17.9.5</MicrosoftBuildPackageVersion>
-
         <!-- https://github.com/dotnet/sdk/blob/v8.0.200/eng/Versions.props#L95 -->
         <NuGetPackageVersion>6.9.1</NuGetPackageVersion>
     </PropertyGroup>
