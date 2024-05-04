@@ -4,5 +4,9 @@
         <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\*.globalconfig" />
         <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Benchmark.globalconfig" Condition="'$(IsBenchmarkProject)' == 'true'" />
         <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Test.globalconfig" Condition="'$(IsTestProject)' == 'true'" />
+
+        <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0130#dotnet_style_namespace_match_folder -->
+        <CompilerVisibleProperty Include="RootNamespace" />
+        <CompilerVisibleProperty Include="ProjectDir" />
     </ItemGroup>
 </Project>
