@@ -4,12 +4,12 @@
             DependsOnTargets="GenerateNuspec"
             Returns="$(PackageTargetPath)">
         <ItemGroup>
-            <_PackageTargetPath Include="@(NuGetPackOutput->WithMetadataValue('Extension', '.nupkg'))"
-                                Condition="!$([System.String]::new('%(Identity)').EndsWith('.symbols.nupkg'))" />
+            <_OpinionPak_PackageTargetPath Include="@(NuGetPackOutput->WithMetadataValue('Extension', '.nupkg'))"
+                                           Condition="!$([System.String]::new('%(Identity)').EndsWith('.symbols.nupkg'))" />
         </ItemGroup>
 
         <PropertyGroup>
-            <PackageTargetPath>%(_PackageTargetPath.FullPath)</PackageTargetPath>
+            <PackageTargetPath>%(_OpinionPak_PackageTargetPath.FullPath)</PackageTargetPath>
         </PropertyGroup>
     </Target>
 </Project>
