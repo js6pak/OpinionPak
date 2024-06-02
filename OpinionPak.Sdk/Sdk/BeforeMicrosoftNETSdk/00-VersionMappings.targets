@@ -82,6 +82,7 @@
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.7'">4.7.0</TargetRoslyn>
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.8'">4.8.0</TargetRoslyn>
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.9'">4.9.0-3.final</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.10'">4.10.0-3.final</TargetRoslyn>
 
         <TargetRoslyn Condition="'$(TargetRoslyn)' == ''">unknown</TargetRoslyn>
     </PropertyGroup>
@@ -103,6 +104,9 @@
         <!-- https://github.com/dotnet/sdk/blob/v8.0.200/eng/Versions.props#L122 -->
         <!-- Should be 17.9.4 but 17.9.5 is closest on nuget.org -->
         <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '8.0.2xx'">5</_MicrosoftBuildPackageVersionPatch>
+
+        <!-- https://github.com/dotnet/sdk/blob/v8.0.300/eng/Versions.props#L124 -->
+        <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '8.0.3xx'">4</_MicrosoftBuildPackageVersionPatch>
 
         <MicrosoftBuildPackageVersion>$(TargetVisualStudio).$(_MicrosoftBuildPackageVersionPatch)</MicrosoftBuildPackageVersion>
     </PropertyGroup>
