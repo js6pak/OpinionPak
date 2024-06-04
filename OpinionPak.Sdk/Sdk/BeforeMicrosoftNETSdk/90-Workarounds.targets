@@ -40,4 +40,23 @@
     <PropertyGroup Condition="'$(UseArtifactsOutput)' == 'true'">
         <NuspecOutputPath Condition="'$(NuspecOutputPath)' == ''">$(BaseIntermediateOutputPath)$(Configuration.ToLowerInvariant())\</NuspecOutputPath>
     </PropertyGroup>
+
+    <Target Name="_WarnAboutBrokenCodeStyleAnalyzer" AfterTargets="ResolveReferences">
+        <PropertyGroup>
+            <_CodeStyleAnalyzer>@(Analyzer->WithMetadataValue('Filename', 'Microsoft.CodeAnalysis.CodeStyle')->WithMetadataValue('Extension', '.dll'))</_CodeStyleAnalyzer>
+        </PropertyGroup>
+
+        <GetAssemblyIdentity AssemblyFiles="$(_CodeStyleAnalyzer)">
+            <Output TaskParameter="Assemblies" ItemName="_CodeStyleAnalyzerIdentity" />
+        </GetAssemblyIdentity>
+
+        <PropertyGroup>
+            <_CodeStyleAnalyzerVersion>@(_CodeStyleAnalyzerIdentity->'%(Version)')</_CodeStyleAnalyzerVersion>
+        </PropertyGroup>
+
+        <Warning Text="The version of .NET SDK you are using has several code style analyzers broken and is not recommended by OpinionPak (https://github.com/dotnet/roslyn/pull/73339). Use 8.0.1xx or 8.0.4xx instead."
+                 Condition="'$(_CodeStyleAnalyzerVersion)' != ''
+                            and $([MSBuild]::VersionGreaterThanOrEquals('$(_CodeStyleAnalyzerVersion)', '4.9'))
+                            and $([MSBuild]::VersionLessThan('$(_CodeStyleAnalyzerVersion)', '4.11'))" />
+    </Target>
 </Project>
