@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.Build.NoTargets">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <!-- TODO uncomment when ready -->
-        <!-- <IsPackable>true</IsPackable> -->
+        <IsPackable>true</IsPackable>
 
         <Description>Templates for OpinionPak</Description>
         <PackageType>Template</PackageType>
