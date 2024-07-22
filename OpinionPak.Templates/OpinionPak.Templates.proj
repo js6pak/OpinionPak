@@ -22,4 +22,32 @@
         <Exec Command="dotnet new uninstall $(PackageId)" ContinueOnError="true" IgnoreExitCode="" />
         <Exec Command="dotnet new install $(PackageTargetPath)" />
     </Target>
+
+    <PropertyGroup>
+        <BeforePack>$(BeforePack);SubstituteInContent</BeforePack>
+    </PropertyGroup>
+
+    <Target Name="SubstituteInContent" AfterTargets="PrepareForBuild" DependsOnTargets="ResolveProjectReferences;GetAssemblyVersion">
+        <ItemGroup>
+            <_FilesToSubstitute Include="templates\Solution\Directory.Build.props" />
+            <_FilesToSubstitute Include="templates\*\.template.config\template.json" />
+
+            <_Substitution Include="@VERSION@" Replacement="$(Version)" />
+            <_Substitution Include="@LATEST_FRAMEWORK@" Replacement="net$(NETCoreAppMaximumVersion)" />
+        </ItemGroup>
+
+        <ItemGroup>
+            <_FilesToSubstitute SubstitutedPath="$(IntermediateOutputPath)\substituted\%(_FilesToSubstitute.Identity)" />
+
+            <Content Remove="@(_FilesToSubstitute)" />
+        </ItemGroup>
+
+        <ReplaceInFile InputFile="%(_FilesToSubstitute.FullPath)"
+                       OutputFile="%(_FilesToSubstitute.SubstitutedPath)"
+                       Patterns="@(_Substitution)" />
+
+        <ItemGroup>
+            <Content Include="%(_FilesToSubstitute.SubstitutedPath)" PackagePath="$(ContentTargetFolders)/%(_FilesToSubstitute.Identity)" />
+        </ItemGroup>
+    </Target>
 </Project>

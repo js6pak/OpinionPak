@@ -8,10 +8,11 @@
   "generatorVersions": "[1.0.0.0-*)",
   "description": "Solution template for OpinionPak",
   "identity": "OpinionPak.Templates.Solution",
-  "shortName": "op-solution",
+  "shortName": "op-sln,op-solution",
   "tags": {
+    "language": "None",
     "type": "solution",
-    "platform": "OpinionPak"
+    "editorTreatAs": "solution"
   },
   "sourceName": "Company.Solution1",
   "preferNameDirectory": true,

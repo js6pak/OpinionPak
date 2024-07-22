@@ -13,8 +13,7 @@
   "shortName": "op-console",
   "tags": {
     "language": "C#",
-    "type": "project",
-    "platform": "OpinionPak"
+    "type": "project"
   },
   "sourceName": "Company.ConsoleApplication1",
   "preferNameDirectory": true,
@@ -23,8 +22,8 @@
       "type": "parameter",
       "datatype": "string",
       "description": "The target framework for the project.",
-      "replaces": "net8.0",
-      "defaultValue": "net8.0",
+      "replaces": "LATEST_FRAMEWORK",
+      "defaultValue": "@LATEST_FRAMEWORK@",
       "displayName": "Framework"
     },
     "SkipRestore": {

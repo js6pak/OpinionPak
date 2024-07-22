@@ -3,4 +3,5 @@
     <UsingTask TaskName="GetDirectoryNameOfFilePatternAbove" AssemblyFile="$(_OpinionPak_TasksAssembly)" />
     <UsingTask TaskName="GetTransitiveDependencies" AssemblyFile="$(_OpinionPak_TasksAssembly)" />
     <UsingTask TaskName="NanoVer" AssemblyFile="$(_OpinionPak_TasksAssembly)" />
+    <UsingTask TaskName="ReplaceInFile" AssemblyFile="$(_OpinionPak_TasksAssembly)" />
 </Project>

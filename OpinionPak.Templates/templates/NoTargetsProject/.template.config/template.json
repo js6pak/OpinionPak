@@ -11,8 +11,7 @@
   "shortName": "op-notargets",
   "tags": {
     "language": "None",
-    "type": "project",
-    "platform": "OpinionPak"
+    "type": "project"
   },
   "sourceName": "Company.NoTargetsProject1",
   "preferNameDirectory": true,
