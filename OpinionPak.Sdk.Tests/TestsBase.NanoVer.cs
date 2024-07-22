@@ -19,12 +19,13 @@ public abstract partial class TestsBase<T>
         await RunAsync("git", "config --local user.email \"<>\"");
         await RunAsync("git", "config --local user.name \"OpinionPak.Sdk.Tests\"");
         await RunAsync("git", "config --local commit.gpgsign false");
+        await RunAsync("git", "config --local tag.gpgsign false");
         await RunAsync("git", "commit --allow-empty -m Initial");
 
         AssertFail(true);
         AssertVersion("0.1.0-dev", ignoreWarnings: true);
 
-        await RunAsync("git", "tag 1.2.3");
+        await RunAsync("git", "tag 1.2.3 -m \"\"");
 
         AssertVersion("1.2.3", true);
         AssertVersion("1.2.4-dev");

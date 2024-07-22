@@ -49,6 +49,11 @@ internal static class Git
             throw new GitException(standardError);
         }
 
+        if (standardOutput.EndsWith("^0", StringComparison.Ordinal))
+        {
+            return standardOutput[..^2];
+        }
+
         return standardOutput;
     }
 
