@@ -24,13 +24,6 @@
                           OutputItemType="_OpinionPakSdkOutputs" />
     </ItemGroup>
 
-    <Target Name="ForceBuildProjectReferences" BeforeTargets="ResolveProjectReferences">
-        <PropertyGroup>
-            <BuildProjectReferences>true</BuildProjectReferences>
-            <BuildingInsideVisualStudio>false</BuildingInsideVisualStudio>
-        </PropertyGroup>
-    </Target>
-
     <Target Name="GenerateConstants"
             BeforeTargets="BeforeCompile;CoreCompile"
             AfterTargets="PrepareForBuild"

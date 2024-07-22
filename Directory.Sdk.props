@@ -18,6 +18,13 @@
                           SkipGetTargetFrameworkProperties="true" SetTargetFramework="TargetFramework=$(_OpinionPak_TasksTFM)" />
     </ItemGroup>
 
+    <Target Name="ForceBuildProjectReferences" BeforeTargets="ResolveProjectReferences">
+        <PropertyGroup>
+            <BuildProjectReferences>true</BuildProjectReferences>
+            <BuildingInsideVisualStudio>false</BuildingInsideVisualStudio>
+        </PropertyGroup>
+    </Target>
+
     <Target Name="DisableCleanReferencedProjects" BeforeTargets="CleanReferencedProjects">
         <PropertyGroup>
             <BuildProjectReferences>false</BuildProjectReferences>
