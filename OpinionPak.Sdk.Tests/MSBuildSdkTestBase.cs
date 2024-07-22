@@ -9,7 +9,7 @@ using Microsoft.Build.Utilities.ProjectCreation;
 
 namespace OpinionPak.Sdk.Tests;
 
-public abstract class MSBuildSdkTestBase : MSBuildTestBase, IDisposable
+public abstract class MSBuildSdkTestBase : IDisposable
 {
     private readonly string _testRootPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
@@ -20,6 +20,8 @@ public abstract class MSBuildSdkTestBase : MSBuildTestBase, IDisposable
         var dotNetSdksPathLazy = (Lazy<string?>) dotNetSdksPathLazyField.GetValue(null)!;
 
         SetValue(dotNetSdksPathLazy, Constants.NetSdkPath);
+
+        MSBuildAssemblyResolver.Register();
 
         static void SetValue<T>(Lazy<T> lazy, T value)
         {

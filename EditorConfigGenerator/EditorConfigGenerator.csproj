@@ -6,7 +6,7 @@
 
         <RunWorkingDirectory>$(MSBuildThisFileDirectory)</RunWorkingDirectory>
 
-        <RoslynVersion>4.9.2</RoslynVersion>
+        <RoslynVersion>4.10.0</RoslynVersion>
     </PropertyGroup>
 
     <ItemGroup>
