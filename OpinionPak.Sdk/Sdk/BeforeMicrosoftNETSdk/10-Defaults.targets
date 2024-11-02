@@ -16,5 +16,6 @@
     <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(Configuration)' == 'Release'">
         <RestoreLockedMode Condition="'$(RestoreLockedMode)' == ''">true</RestoreLockedMode>
         <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == ''">true</TreatWarningsAsErrors>
+        <MSBuildTreatWarningsAsErrors Condition="'$(MSBuildTreatWarningsAsErrors)' == ''">true</MSBuildTreatWarningsAsErrors>
     </PropertyGroup>
 </Project>
