@@ -408,7 +408,8 @@ dotnet_diagnostic.SA1408.severity = none
 ; dotnet_diagnostic.SA1412.severity = none
 
 # SA1413: Use trailing comma in multi-line initializers
-; dotnet_diagnostic.SA1413.severity = warning
+# Superseded by MA0007
+dotnet_diagnostic.SA1413.severity = none
 
 # SA1414: Tuple types in signatures should have element names
 ; dotnet_diagnostic.SA1414.severity = warning

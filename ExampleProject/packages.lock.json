@@ -2,6 +2,12 @@
   "version": 2,
   "dependencies": {
     "net8.0": {
+      "Meziantou.Analyzer": {
+        "type": "Direct",
+        "requested": "[2.0.166, )",
+        "resolved": "2.0.166",
+        "contentHash": "wVoocDWNDUx6WMCFLOrSm1x3gWHXRmwS7TZ9oqEg+axB66EJRlAbCU8IR+TxrUy0+GNw8muR1Z+Ori9oMcFetw=="
+      },
       "PolySharp": {
         "type": "Direct",
         "requested": "[1.14.1, )",

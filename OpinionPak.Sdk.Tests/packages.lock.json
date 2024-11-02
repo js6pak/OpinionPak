@@ -23,6 +23,12 @@
           "Microsoft.TestPlatform.ObjectModel": "17.10.0"
         }
       },
+      "Meziantou.Analyzer": {
+        "type": "Direct",
+        "requested": "[2.0.166, )",
+        "resolved": "2.0.166",
+        "contentHash": "wVoocDWNDUx6WMCFLOrSm1x3gWHXRmwS7TZ9oqEg+axB66EJRlAbCU8IR+TxrUy0+GNw8muR1Z+Ori9oMcFetw=="
+      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[17.10.0, )",
