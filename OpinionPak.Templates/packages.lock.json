@@ -4,9 +4,9 @@
     ".NETStandard,Version=v2.0": {
       "Microsoft.TemplateEngine.Authoring.Tasks": {
         "type": "Direct",
-        "requested": "[8.0.303, )",
-        "resolved": "8.0.303",
-        "contentHash": "v2QBss4s/TSjsqxvB3e+8TOmGdmHzsoN1OTDOyeFLcn29RiPJCY+p18Zkk8f2EyIgn30SEvCqY/pFsTMczXYTw=="
+        "requested": "[8.0.403, )",
+        "resolved": "8.0.403",
+        "contentHash": "wn5+mx2UwuxYxHH1/+/yUBhukcwd+3eyk18tFgFXItZ1aJZ4BjgeelYFRLHMr3zqirebSnCVy7/VS5ehP5supA=="
       }
     }
   }

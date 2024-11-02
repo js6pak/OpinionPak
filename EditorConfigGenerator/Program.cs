@@ -37,11 +37,11 @@ internal sealed class Program
         ImmutableArray<(string Feature, ImmutableArray<IOption2> Options)> groupOptions =
         [
             (WorkspacesResources.dot_NET_Coding_Conventions, [
-                .. GenerationOptions.AllOptions,
-                .. CodeStyleOptions2.AllOptions.Remove(CodeStyleOptions2.FileHeaderTemplate),
+                .. GenerationOptions.EditorConfigOptions,
+                .. CodeStyleOptions2.EditorConfigOptions.Remove(CodeStyleOptions2.FileHeaderTemplate),
             ]),
-            (CSharpWorkspaceResources.CSharp_Coding_Conventions, CSharpCodeStyleOptions.AllOptions),
-            (CSharpWorkspaceResources.CSharp_Formatting_Rules, CSharpFormattingOptions2.AllOptions),
+            (CSharpWorkspaceResources.CSharp_Coding_Conventions, CSharpCodeStyleOptions.EditorConfigOptions),
+            (CSharpWorkspaceResources.CSharp_Formatting_Rules, CSharpFormattingOptions2.EditorConfigOptions),
         ];
 
         var contents = StyleEditorConfigFileGenerator.Generate(groupOptions, optionsReader, LanguageNames.CSharp);
