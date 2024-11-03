@@ -3,41 +3,34 @@
 
 using System.Xml.Linq;
 using Microsoft.Build.Utilities.ProjectCreation;
-using Xunit.Abstractions;
 
 namespace OpinionPak.Sdk.Tests;
 
-public sealed class NuGetSdksTests : TestsBase<NuGetSdksTests.Methods>
+[InheritsTests]
+public sealed class NuGetSdksTests : TestsBase
 {
-    public NuGetSdksTests(ITestOutputHelper output) : base(output)
+    protected override void ModifyNuGetConfig(string testRootPath, XDocument nuGetConfig)
     {
+        var packagesPath = Path.Combine(testRootPath, "packages");
+
+        nuGetConfig.Root!.Add(
+            new XElement(
+                "config",
+                new XElement("add", new XAttribute("key", "globalPackagesFolder"), new XAttribute("value", packagesPath))
+            )
+        );
+
+        var opinionPakSdkPackageDirectory = Path.GetDirectoryName(Constants.OpinionPakSdkPackagePath)!;
+
+        nuGetConfig.Root.Element("packageSources")!
+            .Element("clear")!
+            .AddAfterSelf(new XElement("add", new XAttribute("key", "local"), new XAttribute("value", opinionPakSdkPackageDirectory)));
     }
 
-    public sealed class Methods : ITestsMethods
+    protected override ProjectCreator CreateProject(string path, string sdk)
     {
-        public static void ModifyNuGetConfig(string testRootPath, XDocument nuGetConfig)
-        {
-            var packagesPath = Path.Combine(testRootPath, "packages");
-
-            nuGetConfig.Root!.Add(
-                new XElement(
-                    "config",
-                    new XElement("add", new XAttribute("key", "globalPackagesFolder"), new XAttribute("value", packagesPath))
-                )
-            );
-
-            var opinionPakSdkPackageDirectory = Path.GetDirectoryName(Constants.OpinionPakSdkPackagePath)!;
-
-            nuGetConfig.Root.Element("packageSources")!
-                .Element("clear")!
-                .AddAfterSelf(new XElement("add", new XAttribute("key", "local"), new XAttribute("value", opinionPakSdkPackageDirectory)));
-        }
-
-        public static ProjectCreator CreateProject(string path, string sdk)
-        {
-            return ProjectCreator.Create(path, sdk: sdk)
-                .Sdk("OpinionPak.Sdk", Constants.Version)
-                .Property("TargetFramework", ProjectCreatorConstants.SdkCsprojDefaultTargetFramework);
-        }
+        return ProjectCreator.Create(path, sdk: sdk)
+            .Sdk("OpinionPak.Sdk", Constants.Version)
+            .Property("TargetFramework", ProjectCreatorConstants.SdkCsprojDefaultTargetFramework);
     }
 }

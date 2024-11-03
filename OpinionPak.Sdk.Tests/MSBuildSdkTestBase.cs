@@ -3,9 +3,7 @@
 
 // Based on https://github.com/microsoft/MSBuildSdks/blob/48931d2669fa40de04889422def7c5e7500a6fa6/src/TestShared/MSBuildSdkTestBase.cs
 
-using System.Reflection;
 using System.Xml.Linq;
-using Microsoft.Build.Utilities.ProjectCreation;
 
 namespace OpinionPak.Sdk.Tests;
 
@@ -13,30 +11,13 @@ public abstract class MSBuildSdkTestBase : IDisposable
 {
     private readonly string _testRootPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
-    static MSBuildSdkTestBase()
+    protected virtual void ModifyNuGetConfig(string testRootPath, XDocument nuGetConfig)
     {
-        // TODO upstream
-        var dotNetSdksPathLazyField = typeof(MSBuildAssemblyResolver).GetField("DotNetSdksPathLazy", BindingFlags.NonPublic | BindingFlags.Static)!;
-        var dotNetSdksPathLazy = (Lazy<string?>) dotNetSdksPathLazyField.GetValue(null)!;
-
-        SetValue(dotNetSdksPathLazy, Constants.NetSdkPath);
-
-        MSBuildAssemblyResolver.Register();
-
-        static void SetValue<T>(Lazy<T> lazy, T value)
-        {
-            var stateField = typeof(Lazy<T>).GetField("_state", BindingFlags.NonPublic | BindingFlags.Instance)!;
-            var valueField = typeof(Lazy<T>).GetField("_value", BindingFlags.NonPublic | BindingFlags.Instance)!;
-
-            stateField.SetValue(lazy, null);
-            valueField.SetValue(lazy, value);
-        }
     }
 
-    protected MSBuildSdkTestBase(Action<string, XDocument> modifyNuGetConfig)
+    [Before(Test)]
+    public void SetupNuGet()
     {
-        ArgumentNullException.ThrowIfNull(modifyNuGetConfig);
-
         var nuGetConfig = new XDocument(
             new XElement(
                 "configuration",
@@ -48,7 +29,7 @@ public abstract class MSBuildSdkTestBase : IDisposable
             )
         );
 
-        modifyNuGetConfig(TestRootPath, nuGetConfig);
+        ModifyNuGetConfig(TestRootPath, nuGetConfig);
 
         File.WriteAllText(Path.Combine(TestRootPath, "NuGet.config"), nuGetConfig.ToString());
     }

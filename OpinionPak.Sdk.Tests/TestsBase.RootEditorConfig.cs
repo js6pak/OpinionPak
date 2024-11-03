@@ -1,22 +1,20 @@
 // SPDX-License-Identifier: LGPL-3.0-only
 // SPDX-FileCopyrightText: 2024 js6pak
 
-using Xunit;
-
 namespace OpinionPak.Sdk.Tests;
 
-public abstract partial class TestsBase<T>
+public abstract partial class TestsBase
 {
-    [Fact]
-    public void RootEditorConfig()
+    [Test]
+    public async Task RootEditorConfig()
     {
         var projectCreator = CreateProject(disableRootEditorConfig: false)
             .Save();
 
-        using var buildOutput = Build(projectCreator);
+        using var buildOutput = await BuildAsync(projectCreator);
 
-        buildOutput.AssertNoWarnings();
+        await buildOutput.AssertNoWarnings();
 
-        Assert.True(File.Exists(Path.Combine(TestRootPath, ".editorconfig")));
+        await Assert.That(File.Exists(Path.Combine(TestRootPath, ".editorconfig"))).IsTrue();
     }
 }

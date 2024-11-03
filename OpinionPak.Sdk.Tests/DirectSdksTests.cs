@@ -2,23 +2,16 @@
 // SPDX-FileCopyrightText: 2024 js6pak
 
 using Microsoft.Build.Utilities.ProjectCreation;
-using Xunit.Abstractions;
 
 namespace OpinionPak.Sdk.Tests;
 
-public sealed class DirectSdksTests : TestsBase<DirectSdksTests.Methods>
+[InheritsTests]
+public sealed class DirectSdksTests : TestsBase
 {
-    public DirectSdksTests(ITestOutputHelper output) : base(output)
+    protected override ProjectCreator CreateProject(string path, string sdk)
     {
-    }
-
-    public sealed class Methods : ITestsMethods
-    {
-        public static ProjectCreator CreateProject(string path, string sdk)
-        {
-            return ProjectCreator.Create(path, sdk: sdk)
-                .Import(Constants.DirectorySdkPropsPath)
-                .Property("TargetFramework", ProjectCreatorConstants.SdkCsprojDefaultTargetFramework);
-        }
+        return ProjectCreator.Create(path, sdk: sdk)
+            .Import(Constants.DirectorySdkPropsPath)
+            .Property("TargetFramework", ProjectCreatorConstants.SdkCsprojDefaultTargetFramework);
     }
 }

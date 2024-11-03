@@ -2,6 +2,8 @@ name: CI
 
 on: [ "push", "pull_request" ]
 
+permissions: { }
+
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_NOLOGO: true
@@ -15,6 +17,11 @@ jobs:
 
     env:
       NUGET_ARTIFACTS: artifacts/package/release/*.nupkg
+
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +49,7 @@ jobs:
         run: dotnet format --no-restore --verbosity diagnostic --verify-no-changes
 
       - name: Test
-        run: dotnet test --no-restore --logger GitHubActions
+        run: dotnet test --no-restore -- --report-trx
 
       - name: Run EditorConfigGenerator
         run: dotnet run --no-restore --project ./EditorConfigGenerator -- --verify-no-changes
@@ -64,3 +71,12 @@ jobs:
         run: |
           dotnet nuget push --skip-duplicate $NUGET_ARTIFACTS \
             --source "$NUGET_SOURCE" --api-key "$NUGET_API_KEY"
+
+      - name: Publish Test Results
+        uses: nike4613/actions-test-results@d8e02011059ad4453f87b35d09bfb7b6fd49d557 # v3
+        if: ${{ always() }}
+        with:
+          event_file: ${{ github.event_path }}
+          commit: ${{ github.sha }}
+          use_emojis: true
+          files: 'artifacts/**/TestResults/*.trx'

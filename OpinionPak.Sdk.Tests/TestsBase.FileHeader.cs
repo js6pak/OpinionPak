@@ -1,16 +1,14 @@
 // SPDX-License-Identifier: LGPL-3.0-only
 // SPDX-FileCopyrightText: 2024 js6pak
 
-using Xunit;
-
 namespace OpinionPak.Sdk.Tests;
 
-public abstract partial class TestsBase<T>
+public abstract partial class TestsBase
 {
     private const string FileHeaderMismatch = "IDE0073";
 
-    [Theory]
-    [InlineData(
+    [Test]
+    [Arguments(
         true,
         /* lang=csharp */
         """
@@ -20,14 +18,14 @@ public abstract partial class TestsBase<T>
         Console.WriteLine("Hello, World!");
         """
     )]
-    [InlineData(
+    [Arguments(
         false,
         /* lang=csharp */
         """
         Console.WriteLine("Hello, World!");
         """
     )]
-    public void FileHeader(bool success, string programText)
+    public async Task FileHeader(bool success, string programText)
     {
         var projectCreator = CreateProject(disableFileHeader: false)
             .Property("OutputType", "Exe")
@@ -35,18 +33,19 @@ public abstract partial class TestsBase<T>
             .Property("PackageLicenseExpression", "LGPL-3.0-only")
             .Save();
 
-        File.WriteAllText(
+        await File.WriteAllTextAsync(
             Path.Combine(TestRootPath, "Program.cs"),
             programText + Environment.NewLine
         );
 
-        using var buildOutput = Build(projectCreator);
+        using var buildOutput = await BuildAsync(projectCreator);
 
         var warnings = buildOutput.GetFilteredWarningEvents().ToArray();
+        var warningCodes = warnings.Select(e => e.Code);
 
-        if (success) Assert.DoesNotContain(warnings, e => e.Code == FileHeaderMismatch);
-        else Assert.Contains(warnings, e => e.Code == FileHeaderMismatch);
+        if (success) await Assert.That(warningCodes).DoesNotContain(FileHeaderMismatch);
+        else await Assert.That(warningCodes).Contains(FileHeaderMismatch);
 
-        Assert.Empty(warnings.Where(e => e.Code != FileHeaderMismatch).Select(e => e.Message));
+        await Assert.That(warnings.Where(e => e.Code != FileHeaderMismatch).Select(e => e.Message)).IsEmpty();
     }
 }

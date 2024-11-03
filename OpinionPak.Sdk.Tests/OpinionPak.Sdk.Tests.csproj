@@ -7,11 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" ShadeDependencies="NuGet.Frameworks" />
-        <PackageReference Include="xunit" />
-        <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
-        <PackageReference Include="coverlet.collector" PrivateAssets="all" />
-        <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="all" />
+        <PackageReference Include="TUnit" />
+        <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
 
         <PackageReference Include="AssemblyShader" PrivateAssets="all" />
         <PackageReference Include="MSBuild.ProjectCreation" />
@@ -71,5 +68,10 @@ internal static partial class Constants
             <Compile Include="$(GeneratedConstantsFile)" />
             <FileWrites Include="$(GeneratedConstantsFile)" />
         </ItemGroup>
+    </Target>
+
+    <!-- https://youtrack.jetbrains.com/issue/RIDER-117732 -->
+    <Target Name="WorkaroundRider117732" AfterTargets="Build" Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName)" DestinationFiles="$(OutputPath)$(AssemblyName).exe" />
     </Target>
 </Project>
