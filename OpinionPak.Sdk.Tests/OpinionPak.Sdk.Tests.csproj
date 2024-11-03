@@ -1,21 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net$(NETCoreAppMaximumVersion)</TargetFramework>
+        <InvariantGlobalization>true</InvariantGlobalization>
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" ShadeDependencies="NuGet.Frameworks" />
-        <PackageReference Include="xunit" />
-        <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
-        <PackageReference Include="coverlet.collector" PrivateAssets="all" />
-        <PackageReference Include="GitHubActionsTestLogger" PrivateAssets="all" />
-
-        <PackageReference Include="AssemblyShader" PrivateAssets="all" />
-        <PackageReference Include="MSBuild.ProjectCreation" />
-        <PackageReference Include="SimpleExec" />
+        <PackageReference Include="TUnit" />
+        <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
+        <PackageReference Include="CliWrap" />
     </ItemGroup>
 
     <ItemGroup>
