@@ -3,7 +3,7 @@
 
 namespace OpinionPak.Sdk.Tests;
 
-public abstract partial class TestsBase
+public partial class SdkTests
 {
     private const string FileHeaderMismatch = "IDE0073";
 

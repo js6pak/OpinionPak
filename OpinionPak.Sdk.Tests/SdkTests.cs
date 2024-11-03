@@ -2,12 +2,13 @@
 // SPDX-FileCopyrightText: 2024 js6pak
 
 using System.Collections;
+using System.Xml.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities.ProjectCreation;
 
 namespace OpinionPak.Sdk.Tests;
 
-public abstract partial class TestsBase : MSBuildSdkTestBase
+public sealed partial class SdkTests : MSBuildSdkTestBase
 {
     [Before(TestSession)]
     public static void ClearEnvironment()
@@ -25,7 +26,30 @@ public abstract partial class TestsBase : MSBuildSdkTestBase
         }
     }
 
-    protected abstract ProjectCreator CreateProject(string path, string sdk);
+    protected override void ModifyNuGetConfig(string testRootPath, XDocument nuGetConfig)
+    {
+        var packagesPath = Path.Combine(testRootPath, "packages");
+
+        nuGetConfig.Root!.Add(
+            new XElement(
+                "config",
+                new XElement("add", new XAttribute("key", "globalPackagesFolder"), new XAttribute("value", packagesPath))
+            )
+        );
+
+        var opinionPakSdkPackageDirectory = Path.GetDirectoryName(Constants.OpinionPakSdkPackagePath)!;
+
+        nuGetConfig.Root.Element("packageSources")!
+            .Element("clear")!
+            .AddAfterSelf(new XElement("add", new XAttribute("key", "local"), new XAttribute("value", opinionPakSdkPackageDirectory)));
+    }
+
+    private static ProjectCreator CreateProject(string path, string sdk)
+    {
+        return ProjectCreator.Create(path, sdk: sdk)
+            .Sdk("OpinionPak.Sdk", Constants.Version)
+            .Property("TargetFramework", ProjectCreatorConstants.SdkCsprojDefaultTargetFramework);
+    }
 
     private ProjectCreator CreateProject(
         string sdk = ProjectCreatorConstants.SdkCsprojDefaultSdk,
