@@ -8,23 +8,23 @@ namespace OpinionPak.Sdk.Tasks;
 
 internal static class Git
 {
-    public static async Task<bool> IsInsideWorkTree(string workingDirectory)
+    public static async Task<bool> IsInsideWorkTreeAsync(string workingDirectory)
     {
-        return await RevParseBoolean(workingDirectory, "--is-inside-work-tree");
+        return await RevParseBooleanAsync(workingDirectory, "--is-inside-work-tree");
     }
 
-    public static async Task<bool> IsShallowRepository(string workingDirectory)
+    public static async Task<bool> IsShallowRepositoryAsync(string workingDirectory)
     {
-        return await RevParseBoolean(workingDirectory, "--is-shallow-repository");
+        return await RevParseBooleanAsync(workingDirectory, "--is-shallow-repository");
     }
 
-    private static async Task<bool> RevParseBoolean(string workingDirectory, string flag)
+    private static async Task<bool> RevParseBooleanAsync(string workingDirectory, string flag)
     {
-        var (exitCode, standardOutput, _) = await Run(workingDirectory, "rev-parse", flag);
+        var (exitCode, standardOutput, _) = await RunAsync(workingDirectory, "rev-parse", flag);
         return exitCode == 0 && bool.Parse(standardOutput);
     }
 
-    public static async Task<string?> DescribeTag(string workingDirectory, string match, bool currentOnly)
+    public static async Task<string?> DescribeTagAsync(string workingDirectory, string match, bool currentOnly)
     {
         var arguments = new[] { "describe", "--abbrev=0", "--tags", "--match", match };
 
@@ -33,7 +33,7 @@ internal static class Git
             arguments = [.. arguments, "--contains", "HEAD"];
         }
 
-        var (exitCode, standardOutput, standardError) = await Run(workingDirectory, arguments);
+        var (exitCode, standardOutput, standardError) = await RunAsync(workingDirectory, arguments);
 
         if (exitCode != 0)
         {
@@ -59,7 +59,7 @@ internal static class Git
 
     private const int ErrorFileNotFound = 0x2;
 
-    private static async Task<(int ExitCode, string StandardOutput, string StandardError)> Run(string workingDirectory, params string[] arguments)
+    private static async Task<(int ExitCode, string StandardOutput, string StandardError)> RunAsync(string workingDirectory, params string[] arguments)
     {
         using var process = new Process();
 

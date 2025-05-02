@@ -1,0 +1,5 @@
+[*.cs]
+
+# MA0110: Use the Regex source generator
+# Justification: Too much effort when multi-targeting .NET Framework
+dotnet_diagnostic.MA0110.severity = none

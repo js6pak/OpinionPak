@@ -38,19 +38,19 @@ public sealed class NanoVer : MSBuildTask
 
         try
         {
-            if (!await Git.IsInsideWorkTree(WorkingDirectory))
+            if (!await Git.IsInsideWorkTreeAsync(WorkingDirectory))
             {
                 Log.LogError("The git repository was not found");
                 return false;
             }
 
-            if (await Git.IsShallowRepository(WorkingDirectory))
+            if (await Git.IsShallowRepositoryAsync(WorkingDirectory))
             {
                 Log.LogError("The git repository can't be shallow");
                 return false;
             }
 
-            var tag = await Git.DescribeTag(WorkingDirectory, $"{TagPrefix}{SimpleVersionGlob}", PublicRelease);
+            var tag = await Git.DescribeTagAsync(WorkingDirectory, $"{TagPrefix}{SimpleVersionGlob}", PublicRelease);
             SemanticVersion version;
 
             if (tag != null)
@@ -103,7 +103,7 @@ public sealed class NanoVer : MSBuildTask
 
     private static bool TryParseMinimumMajorMinor(string value, out int minimumMinor, out int minimumMajor)
     {
-        var minimumMajorMinorRegex = new Regex(@"^(?<major>0|[1-9]\d*)\.(?<minor>0|[1-9]\d*)$");
+        var minimumMajorMinorRegex = new Regex(@"^(?<major>0|[1-9]\d*)\.(?<minor>0|[1-9]\d*)$", RegexOptions.None, TimeSpan.FromSeconds(1));
 
         var match = minimumMajorMinorRegex.Match(value);
         if (
