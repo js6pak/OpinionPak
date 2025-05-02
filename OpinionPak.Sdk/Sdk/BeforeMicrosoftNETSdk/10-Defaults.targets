@@ -13,7 +13,7 @@
         <GenerateRootEditorConfig Condition="'$(GenerateRootEditorConfig)' == ''">true</GenerateRootEditorConfig>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(Configuration)' == 'Release'">
+    <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(PublicRelease)' == 'true'">
         <RestoreLockedMode Condition="'$(RestoreLockedMode)' == ''">true</RestoreLockedMode>
         <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == ''">true</TreatWarningsAsErrors>
         <MSBuildTreatWarningsAsErrors Condition="'$(MSBuildTreatWarningsAsErrors)' == ''">true</MSBuildTreatWarningsAsErrors>
