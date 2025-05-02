@@ -180,7 +180,7 @@ dotnet_diagnostic.SA1111.severity = none
 ; dotnet_diagnostic.SA1116.severity = warning
 
 # SA1117: Parameters should be on same line or separate lines
-; dotnet_diagnostic.SA1117.severity = warning
+dotnet_diagnostic.SA1117.severity = none
 
 # SA1118: Parameter should not span multiple lines
 dotnet_diagnostic.SA1118.severity = none
@@ -385,7 +385,8 @@ dotnet_diagnostic.SA1402.severity = none
 ; dotnet_diagnostic.SA1404.severity = warning
 
 # SA1405: Debug.Assert should provide message text
-; dotnet_diagnostic.SA1405.severity = warning
+# Justification: any friction to adding asserts is bad
+dotnet_diagnostic.SA1405.severity = none
 
 # SA1406: Debug.Fail should provide message text
 ; dotnet_diagnostic.SA1406.severity = warning
@@ -459,13 +460,15 @@ dotnet_diagnostic.SA1507.severity = none
 dotnet_diagnostic.SA1512.severity = none
 
 # SA1513: Closing brace should be followed by blank line
-; dotnet_diagnostic.SA1513.severity = warning
+# Justification: doesn't play well with switch expressions
+dotnet_diagnostic.SA1513.severity = none
 
 # SA1514: Element documentation header should be preceded by blank line
 ; dotnet_diagnostic.SA1514.severity = warning
 
 # SA1515: Single-line comment should be preceded by blank line
-; dotnet_diagnostic.SA1515.severity = warning
+# Justification: the first-in-scope exception doesn't work in collection initializers
+dotnet_diagnostic.SA1515.severity = none
 
 # SA1516: Elements should be separated by blank line
 dotnet_diagnostic.SA1516.severity = none

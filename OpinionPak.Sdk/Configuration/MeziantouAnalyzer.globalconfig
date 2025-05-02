@@ -337,7 +337,7 @@ dotnet_diagnostic.MA0097.severity = none
 dotnet_diagnostic.MA0098.severity = warning
 
 # MA0099: Use Explicit enum value instead of 0
-dotnet_diagnostic.MA0099.severity = warning
+dotnet_diagnostic.MA0099.severity = none
 
 # MA0100: Await task before disposing of resources
 dotnet_diagnostic.MA0100.severity = error
