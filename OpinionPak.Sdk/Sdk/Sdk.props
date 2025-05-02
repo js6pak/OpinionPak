@@ -11,8 +11,8 @@
         <_OpinionPak_SdkPath>$(MSBuildThisFileDirectory)..\</_OpinionPak_SdkPath>
 
         <!--
-            BeforeMicrosoftNETSdkTargets doesn't exist in the SDK yet (https://github.com/dotnet/sdk/pull/40344),
-            but we still set it in case it has to be used manually (e.g. for MSBuildTasksProject)
+            BeforeMicrosoftNETSdkTargets is only available in 9.0.1xx and above (https://github.com/dotnet/sdk/pull/40344)
+            TODO remove the fallback after .NET 8 goes EOL
         -->
         <BeforeMicrosoftNETSdkTargets>$(MSBuildThisFileDirectory)BeforeMicrosoftNETSdkTargets.targets</BeforeMicrosoftNETSdkTargets>
 
