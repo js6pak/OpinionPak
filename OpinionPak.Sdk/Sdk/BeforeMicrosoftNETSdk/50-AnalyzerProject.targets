@@ -50,19 +50,9 @@
 
     <!-- if !UsingMicrosoftNoTargetsSdk -->
     <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(UsingMicrosoftNoTargetsSdk)' != 'true'">
-        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true" />
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true" Condition="'$(IsCodeFixesProject)' == 'true'" />
-
-        <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" />
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynPackageVersion)" />
-        <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynPackageVersion)" Condition="'$(IsCodeFixesProject)' == 'true'" />
-    </ItemGroup>
-
-    <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(UsingMicrosoftNoTargetsSdk)' != 'true' and '$(ManagePackageVersionsCentrally)' != 'true'">
-        <PackageReference Update="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" />
-        <PackageReference Update="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynPackageVersion)" />
-        <PackageReference Update="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynPackageVersion)" Condition="'$(IsCodeFixesProject)' == 'true'" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" PrivateAssets="all" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(RoslynPackageVersion)" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true" IsImplicitlyDefined="true" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(RoslynPackageVersion)" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true" Condition="'$(IsCodeFixesProject)' == 'true'" IsImplicitlyDefined="true" />
     </ItemGroup>
     <!-- else -->
     <ItemGroup Condition="'$(IsAnalyzerProject)' == 'true' and '$(UsingMicrosoftNoTargetsSdk)' == 'true'">
