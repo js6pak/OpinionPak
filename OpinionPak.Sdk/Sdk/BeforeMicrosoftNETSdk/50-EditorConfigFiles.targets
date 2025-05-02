@@ -4,6 +4,8 @@
         <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\*.globalconfig" />
         <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Benchmark.globalconfig" Condition="'$(IsBenchmarkProject)' == 'true'" />
         <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\Test.globalconfig" Condition="'$(IsTestProject)' == 'true'" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\TestLike.globalconfig" Condition="'$(IsTestProject)' == 'true' or '$(IsBenchmarkProject)' == 'true'" />
+        <EditorConfigFiles Include="$(_OpinionPak_SdkPath)\Configuration\ProjectTypes\InvariantGlobalization.globalconfig" Condition="'$(InvariantGlobalization)' == 'true'" />
 
         <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0130#dotnet_style_namespace_match_folder -->
         <CompilerVisibleProperty Include="RootNamespace" />

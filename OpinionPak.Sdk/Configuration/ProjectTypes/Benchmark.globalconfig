@@ -1,5 +1,2 @@
 is_global = true
 global_level = -30
-
-# CA1707: Identifiers should not contain underscores
-dotnet_diagnostic.CA1707.severity = none

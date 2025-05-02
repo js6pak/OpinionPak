@@ -11,5 +11,8 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
         <NanoVer>true</NanoVer>
+
+        <IsTestProject>$(MSBuildProjectName.EndsWith('.Tests'))</IsTestProject>
+        <IsBenchmarkProject>$(MSBuildProjectName.EndsWith('.Benchmarks'))</IsBenchmarkProject>
     </PropertyGroup>
 </Project>

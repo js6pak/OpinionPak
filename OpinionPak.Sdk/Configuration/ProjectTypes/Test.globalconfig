@@ -1,11 +1,2 @@
 is_global = true
 global_level = -30
-
-# CA1707: Identifiers should not contain underscores
-dotnet_diagnostic.CA1707.severity = none
-
-# MA0137: Use 'Async' suffix when a method returns an awaitable type
-dotnet_diagnostic.MA0137.severity = none
-
-# MA0156: Use 'Async' suffix when a method returns IAsyncEnumerable<T>
-dotnet_diagnostic.MA0156.severity = none
