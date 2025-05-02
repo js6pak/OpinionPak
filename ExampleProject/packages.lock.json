@@ -1,18 +1,18 @@
 {
   "version": 2,
   "dependencies": {
-    "net8.0": {
+    "net9.0": {
       "Meziantou.Analyzer": {
         "type": "Direct",
-        "requested": "[2.0.166, )",
-        "resolved": "2.0.166",
-        "contentHash": "wVoocDWNDUx6WMCFLOrSm1x3gWHXRmwS7TZ9oqEg+axB66EJRlAbCU8IR+TxrUy0+GNw8muR1Z+Ori9oMcFetw=="
+        "requested": "[2.0.199, )",
+        "resolved": "2.0.199",
+        "contentHash": "y8oRrTLDBw1b10pWci/PnFoahdIMflNSlVheL9kzUylAASnoJPFyvuyaNXcrbOTNOEk1aMLFRr1mSX/xvYR15g=="
       },
       "PolySharp": {
         "type": "Direct",
-        "requested": "[1.14.1, )",
-        "resolved": "1.14.1",
-        "contentHash": "mOOmFYwad3MIOL14VCjj02LljyF1GNw1wP0YVlxtcPvqdxjGGMNdNJJxHptlry3MOd8b40Flm8RPOM8JOlN2sQ=="
+        "requested": "[1.15.0, )",
+        "resolved": "1.15.0",
+        "contentHash": "FbU0El+EEjdpuIX4iDbeS7ki1uzpJPx8vbqOzEtqnl1GZeAGJfq+jCbxeJL2y0EPnUNk8dRnnqR2xnYXg9Tf+g=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",

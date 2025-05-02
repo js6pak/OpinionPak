@@ -40,6 +40,10 @@
         <TargetVisualStudio Condition="'$(TargetNetSdk)' == '8.0.1xx'">17.8</TargetVisualStudio>
         <TargetVisualStudio Condition="'$(TargetNetSdk)' == '8.0.2xx'">17.9</TargetVisualStudio>
         <TargetVisualStudio Condition="'$(TargetNetSdk)' == '8.0.3xx'">17.10</TargetVisualStudio>
+        <TargetVisualStudio Condition="'$(TargetNetSdk)' == '8.0.4xx'">17.11</TargetVisualStudio>
+        <TargetVisualStudio Condition="'$(TargetNetSdk)' == '9.0.1xx'">17.12</TargetVisualStudio>
+        <TargetVisualStudio Condition="'$(TargetNetSdk)' == '9.0.2xx'">17.13</TargetVisualStudio>
+        <TargetVisualStudio Condition="'$(TargetNetSdk)' == '9.0.3xx'">17.14</TargetVisualStudio>
 
         <TargetVisualStudio Condition="'$(TargetVisualStudio)' == ''">unknown</TargetVisualStudio>
     </PropertyGroup>
@@ -81,8 +85,11 @@
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.6'">4.6.0</TargetRoslyn>
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.7'">4.7.0</TargetRoslyn>
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.8'">4.8.0</TargetRoslyn>
-        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.9'">4.9.0-3.final</TargetRoslyn>
-        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.10'">4.10.0-3.final</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.9'">4.9.0</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.10'">4.10.0</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.11'">4.11.0</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.12'">4.12.0</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.13'">4.13.0</TargetRoslyn>
 
         <TargetRoslyn Condition="'$(TargetRoslyn)' == ''">unknown</TargetRoslyn>
     </PropertyGroup>
@@ -107,6 +114,15 @@
 
         <!-- https://github.com/dotnet/sdk/blob/v8.0.300/eng/Versions.props#L124 -->
         <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '8.0.3xx'">4</_MicrosoftBuildPackageVersionPatch>
+
+        <!-- https://github.com/dotnet/sdk/blob/v8.0.400/eng/Versions.props#L124 -->
+        <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '8.0.4xx'">3</_MicrosoftBuildPackageVersionPatch>
+
+        <!-- https://github.com/dotnet/sdk/blob/v9.0.100/eng/Versions.props#L199 -->
+        <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '9.0.1xx'">7</_MicrosoftBuildPackageVersionPatch>
+
+        <!-- https://github.com/dotnet/sdk/blob/v9.0.200/eng/Versions.props#L181 -->
+        <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '9.0.2xx'">8</_MicrosoftBuildPackageVersionPatch>
 
         <MicrosoftBuildPackageVersion>$(TargetVisualStudio).$(_MicrosoftBuildPackageVersionPatch)</MicrosoftBuildPackageVersion>
     </PropertyGroup>

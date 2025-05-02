@@ -46,6 +46,9 @@ dotnet_diagnostic.CA1815.severity = none
 # CA1819: Properties should not return arrays
 dotnet_diagnostic.CA1819.severity = none
 
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = suggestion
+
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
 

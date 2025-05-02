@@ -1,7 +1,7 @@
 ﻿<Project Sdk="OpinionPak.Sdk/0.1.0-ci.17">
     <PropertyGroup>
         <IsMSBuildTasksProject>true</IsMSBuildTasksProject>
-        <TargetNetSdk>8.0.1xx</TargetNetSdk>
+        <TargetNetSdk>$(MinimumNetSdk)</TargetNetSdk>
         <IsPackable>true</IsPackable>
 
         <Description>My .NET opinions packaged as a MSBuild SDK</Description>

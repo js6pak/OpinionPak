@@ -45,6 +45,7 @@ dotnet_style_prefer_conditional_expression_over_return = true
 dotnet_style_prefer_compound_assignment = true
 dotnet_style_prefer_simplified_interpolation = true
 dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed
+dotnet_prefer_system_hash_code = true
 dotnet_style_namespace_match_folder = true
 
 # Field preferences
@@ -103,6 +104,7 @@ csharp_style_prefer_readonly_struct_member = true
 ; default: true
 csharp_prefer_braces = when_multiline
 csharp_prefer_simple_using_statement = true
+csharp_prefer_system_threading_lock = true
 ; default: block_scoped
 csharp_style_namespace_declarations = file_scoped
 csharp_style_prefer_method_group_conversion = true
@@ -118,6 +120,7 @@ csharp_style_deconstructed_variable_declaration = true
 csharp_style_prefer_index_operator = true
 csharp_style_prefer_range_operator = true
 csharp_style_prefer_utf8_string_literals = true
+csharp_style_prefer_unbound_generic_type_in_nameof = true
 csharp_prefer_simple_default_expression = true
 csharp_style_prefer_local_over_anonymous_function = true
 csharp_style_prefer_tuple_swap = true

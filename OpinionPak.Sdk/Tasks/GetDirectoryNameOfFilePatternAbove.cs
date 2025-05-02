@@ -14,7 +14,7 @@ public sealed class GetDirectoryNameOfFilePatternAbove : MSBuildTask
     public required string StartingDirectory { get; init; }
 
     [Required]
-    public required string SearchPattern { get; init; }
+    public required string[] SearchPatterns { get; init; }
 
     [Output]
     public string? DirectoryName { get; private set; }
@@ -25,7 +25,7 @@ public sealed class GetDirectoryNameOfFilePatternAbove : MSBuildTask
 
         do
         {
-            if (Directory.GetFiles(lookInDirectory, SearchPattern).Length != 0)
+            if (SearchPatterns.Any(searchPattern => Directory.GetFiles(lookInDirectory, searchPattern).Length != 0))
             {
                 DirectoryName = lookInDirectory;
                 return true;

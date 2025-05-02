@@ -2,6 +2,8 @@ name: CI
 
 on: [ "push", "pull_request" ]
 
+permissions: { }
+
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_NOLOGO: true
@@ -11,7 +13,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     env:
       NUGET_ARTIFACTS: artifacts/package/release/*.nupkg
@@ -23,7 +25,7 @@ jobs:
           filter: tree:0
 
       - name: Setup .NET
-        uses: js6pak/setup-dotnet@8a21b4ed1527c384b6d4b7919db11dcb8389065c # https://github.com/actions/setup-dotnet/pull/538
+        uses: js6pak/setup-dotnet@d3880cac5f837959c67b5235dcecbbf2d8e7c626 # https://github.com/actions/setup-dotnet/pull/538
         with:
           global-json-file: global.json
 

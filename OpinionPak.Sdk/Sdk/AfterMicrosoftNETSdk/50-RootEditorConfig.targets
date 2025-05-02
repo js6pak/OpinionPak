@@ -5,7 +5,7 @@
             Condition="'$(GenerateRootEditorConfig)' == 'true' and '$(_OpinionPak_IgnoreTasks)' != 'true'">
         <GetDirectoryNameOfFilePatternAbove
             Condition="$(SolutionDir) == '' or $(SolutionDir) == '*Undefined*'"
-            StartingDirectory="$(MSBuildProjectDirectory)" SearchPattern="*.sln">
+            StartingDirectory="$(MSBuildProjectDirectory)" SearchPatterns="*.sln;*.slnx">
             <Output TaskParameter="DirectoryName" PropertyName="SolutionDir" />
         </GetDirectoryNameOfFilePatternAbove>
 
