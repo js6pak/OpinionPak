@@ -124,7 +124,8 @@ dotnet_diagnostic.MA0035.severity = warning
 dotnet_diagnostic.MA0036.severity = none
 
 # MA0037: Remove empty statement
-dotnet_diagnostic.MA0037.severity = error
+# Superseded by SA1106
+dotnet_diagnostic.MA0037.severity = none
 
 # MA0038: Make method static (deprecated, use CA1822 instead)
 # Superseded by CA1822
@@ -433,7 +434,7 @@ dotnet_diagnostic.MA0129.severity = warning
 dotnet_diagnostic.MA0130.severity = warning
 
 # MA0131: ArgumentNullException.ThrowIfNull should not be used with non-nullable types
-dotnet_diagnostic.MA0131.severity = warning
+dotnet_diagnostic.MA0131.severity = none
 
 # MA0132: Do not convert implicitly to DateTimeOffset
 dotnet_diagnostic.MA0132.severity = warning
