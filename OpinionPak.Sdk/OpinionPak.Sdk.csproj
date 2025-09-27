@@ -1,4 +1,4 @@
-﻿<Project Sdk="OpinionPak.Sdk/0.1.0-ci.30">
+﻿<Project Sdk="OpinionPak.Sdk/0.1.0-ci.47">
     <PropertyGroup>
         <IsMSBuildTasksProject>true</IsMSBuildTasksProject>
         <TargetNetSdk>$(MinimumNetSdk)</TargetNetSdk>

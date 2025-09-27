@@ -90,6 +90,7 @@
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.11'">4.11.0</TargetRoslyn>
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.12'">4.12.0</TargetRoslyn>
         <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.13'">4.13.0</TargetRoslyn>
+        <TargetRoslyn Condition="'$(TargetVisualStudio)' == '17.14'">4.14.0</TargetRoslyn>
 
         <TargetRoslyn Condition="'$(TargetRoslyn)' == ''">unknown</TargetRoslyn>
     </PropertyGroup>
@@ -123,6 +124,9 @@
 
         <!-- https://github.com/dotnet/sdk/blob/v9.0.200/eng/Versions.props#L181 -->
         <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '9.0.2xx'">8</_MicrosoftBuildPackageVersionPatch>
+
+        <!-- https://github.com/dotnet/sdk/blob/v9.0.300/eng/Versions.props#L185 -->
+        <_MicrosoftBuildPackageVersionPatch Condition="'$(TargetNetSdk)' == '9.0.3xx'">5</_MicrosoftBuildPackageVersionPatch>
 
         <MicrosoftBuildPackageVersion>$(TargetVisualStudio).$(_MicrosoftBuildPackageVersionPatch)</MicrosoftBuildPackageVersion>
     </PropertyGroup>
