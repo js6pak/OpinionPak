@@ -1,0 +1,9 @@
+<Project>
+    <!-- Disable msbuild's lookup of reference assemblies through default install locations -->
+    <PropertyGroup>
+        <!-- https://github.com/dotnet/reproducible-builds/issues/61 -->
+        <PrunePackageTargetingPackRoots>$(NetCoreTargetingPackRoot)</PrunePackageTargetingPackRoots>
+
+        <NetCoreTargetingPackRoot>[UNDEFINED]</NetCoreTargetingPackRoot>
+    </PropertyGroup>
+</Project>
