@@ -3,6 +3,7 @@
         <LangVersion>latest</LangVersion>
         <Features>strict</Features>
         <DebugType>embedded</DebugType>
+        <CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <ReportAnalyzer>true</ReportAnalyzer>
