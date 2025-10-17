@@ -172,7 +172,7 @@ internal static partial class DotnetBuildCommand
             m.Groups["code"].Value,
             m.Groups["message"].Value,
             m.Groups["projectFile"].Value
-        )).ToArray();
+        )).Distinct().ToArray();
 
         public IEnumerable<BuildEvent> Errors => Events.Where(m => m.Severity == BuildEventSeverity.Error);
         public IEnumerable<BuildEvent> Warnings => Events.Where(m => m.Severity == BuildEventSeverity.Warning);

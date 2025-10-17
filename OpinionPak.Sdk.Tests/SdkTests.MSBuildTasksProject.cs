@@ -19,6 +19,7 @@ public partial class SdkTests
                  <Sdk Name="OpinionPak.Sdk" Version="{Constants.Version}" />
 
                 <PropertyGroup>
+                    <NuGetAudit>false</NuGetAudit>
                     <GenerateFileHeaderEditorConfig>false</GenerateFileHeaderEditorConfig>
                     <NanoVer>false</NanoVer>
                     <GenerateRootEditorConfig>false</GenerateRootEditorConfig>

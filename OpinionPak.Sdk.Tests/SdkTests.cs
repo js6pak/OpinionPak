@@ -8,11 +8,10 @@ using OpinionPak.Sdk.Tests.Utilities;
 
 namespace OpinionPak.Sdk.Tests;
 
-[Arguments("10_0_1xx-preview_3")]
-[Arguments("9_0_2xx")]
+[Arguments("10_0_1xx-rc")]
+[Arguments("9_0_3xx")]
 [Arguments("9_0_1xx")]
 [Arguments("8_0_4xx")]
-// [Arguments("8_0_1xx")] TODO would be nice to test, but annoying unless https://github.com/dotnet/msbuild/issues/10181 is solved
 public sealed partial class SdkTests(string SdkVersion) : SdkTestsBase
 {
     private string SdkVersion { get; } = SdkVersion.Replace('_', '.'); // a little hack to avoid dots breaking tests explorer TODO fix upstream?
@@ -81,6 +80,7 @@ public sealed partial class SdkTests(string SdkVersion) : SdkTestsBase
                     "PropertyGroup",
                     new XElement("TargetFramework", targetFramework),
                     new XElement("SolutionDir", TestRootPath),
+                    new XElement("NuGetAudit", "false"),
                     disableFileHeader ? new XElement("GenerateFileHeaderEditorConfig", "false") : null,
                     disableNanoVer ? new XElement("NanoVer", "false") : null,
                     disableRootEditorConfig ? new XElement("GenerateRootEditorConfig", "false") : null
