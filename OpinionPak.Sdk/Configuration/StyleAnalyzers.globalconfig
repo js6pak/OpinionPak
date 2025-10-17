@@ -37,6 +37,9 @@ dotnet_diagnostic.IDE0058.severity = none
 # IDE0060: Remove unused parameter
 dotnet_diagnostic.IDE0060.severity = none
 
+# IDE0063: Use simple 'using' statement
+dotnet_diagnostic.IDE0063.severity = suggestion
+
 # IDE0211: Convert to 'Program.Main' style program
 dotnet_diagnostic.IDE0211.severity = suggestion
 

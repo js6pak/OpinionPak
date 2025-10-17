@@ -187,7 +187,7 @@ MA0053.public_class_should_be_sealed = true
 dotnet_diagnostic.CA1852.severity = none
 
 # MA0054: Embed the caught exception as innerException
-dotnet_diagnostic.MA0054.severity = warning
+dotnet_diagnostic.MA0054.severity = suggestion
 
 # MA0055: Do not use finalizer
 dotnet_diagnostic.MA0055.severity = none
