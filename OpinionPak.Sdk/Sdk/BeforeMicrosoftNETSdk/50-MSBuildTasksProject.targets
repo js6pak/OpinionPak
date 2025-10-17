@@ -19,6 +19,9 @@
                           Version="$(MicrosoftBuildPackageVersion)"
                           PrivateAssets="all" ExcludeAssets="runtime" ExcludeTransitiveRuntime="true"
                           IsImplicitlyDefined="true" />
+
+        <!-- We reference the Microsoft.Build package just for the compiler reference, so CVEs regarding it are not relevant -->
+        <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-w3q9-fxm7-j8fq" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(IsMSBuildTasksProject)' == 'true' and ('$(ImplicitUsings)' == 'true' or '$(ImplicitUsings)' == 'enable')">
