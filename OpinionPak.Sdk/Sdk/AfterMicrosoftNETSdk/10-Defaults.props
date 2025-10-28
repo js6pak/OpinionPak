@@ -1,8 +1,9 @@
 <Project>
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
-        <Features>strict</Features>
+        <Features>$(Features);strict</Features>
         <DebugType>embedded</DebugType>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
         <CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
