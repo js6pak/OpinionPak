@@ -40,6 +40,9 @@ dotnet_diagnostic.IDE0060.severity = none
 # IDE0063: Use simple 'using' statement
 dotnet_diagnostic.IDE0063.severity = suggestion
 
+# IDE0072: Populate switch
+dotnet_diagnostic.IDE0072.severity = suggestion
+
 # IDE0211: Convert to 'Program.Main' style program
 dotnet_diagnostic.IDE0211.severity = suggestion
 

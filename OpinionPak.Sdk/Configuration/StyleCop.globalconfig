@@ -382,7 +382,7 @@ dotnet_diagnostic.SA1402.severity = none
 ; dotnet_diagnostic.SA1403.severity = warning
 
 # SA1404: Code analysis suppression should have justification
-; dotnet_diagnostic.SA1404.severity = warning
+dotnet_diagnostic.SA1404.severity = suggestion
 
 # SA1405: Debug.Assert should provide message text
 # Justification: any friction to adding asserts is bad
@@ -612,7 +612,8 @@ dotnet_diagnostic.SA1633.severity = none
 ; dotnet_diagnostic.SA1648.severity = warning
 
 # SA1649: File name should match first type name
-; dotnet_diagnostic.SA1649.severity = warning
+# Superseded by MA0048
+dotnet_diagnostic.SA1649.severity = none
 
 # SA1651: Do not use placeholder elements
 ; dotnet_diagnostic.SA1651.severity = warning
