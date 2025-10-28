@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup Condition="'$(UsingMicrosoftNoTargetsSdk)' != 'true'">
-        <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopAnalyzersVersion)" Condition="'$(SkipOpinionPakConfigFiles)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="Meziantou.Analyzer" Version="$(MeziantouAnalyzerVersion)" Condition="'$(SkipOpinionPakConfigFiles)' != 'true'" IsImplicitlyDefined="true" />
-        <PackageReference Include="PolySharp" Version="$(PolySharpVersion)" Condition="'$(SkipPolySharp)' != 'true'" IsImplicitlyDefined="true" />
+        <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopAnalyzersVersion)" Condition="'$(SkipOpinionPakConfigFiles)' != 'true'" IsImplicitlyDefined="true" PrivateAssets="all" />
+        <PackageReference Include="Meziantou.Analyzer" Version="$(MeziantouAnalyzerVersion)" Condition="'$(SkipOpinionPakConfigFiles)' != 'true'" IsImplicitlyDefined="true" PrivateAssets="all" />
+        <PackageReference Include="PolySharp" Version="$(PolySharpVersion)" Condition="'$(SkipPolySharp)' != 'true'" IsImplicitlyDefined="true" PrivateAssets="all" />
     </ItemGroup>
 </Project>
