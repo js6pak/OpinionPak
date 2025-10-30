@@ -3,6 +3,14 @@
         <_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets>true</_OpinionPak_ImportedBeforeMicrosoftNETSdkTargets>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <!-- Enable CopyLocalLockFileAssemblies by default only for executable projects, which is the default behavior for .NET Core 3.0+ -->
+        <CopyLocalLockFileAssemblies Condition="'$(CopyLocalLockFileAssemblies)' == '' and ('$(OutputType)' == 'Exe' or '$(OutputType)' == 'WinExe' or '$(EnableDynamicLoading)' == 'true')">true</CopyLocalLockFileAssemblies>
+        <CopyLocalLockFileAssemblies Condition="'$(CopyLocalLockFileAssemblies)' == ''">false</CopyLocalLockFileAssemblies>
+
+        <CopyDebugSymbolFilesFromPackages Condition="'$(CopyDebugSymbolFilesFromPackages)' == '' and '$(CopyLocalLockFileAssemblies)' == 'true'">true</CopyDebugSymbolFilesFromPackages>
+    </PropertyGroup>
+
     <PropertyGroup Condition="'$(SkipOpinionPakConfigFiles)' != 'true'">
         <EnableNETAnalyzers Condition="'$(EnableNETAnalyzers)' == ''">true</EnableNETAnalyzers>
         <AnalysisLevel Condition="'$(AnalysisLevel)' == ''">latest</AnalysisLevel>
